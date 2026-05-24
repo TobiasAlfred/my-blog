@@ -6,10 +6,10 @@
 
 export const SITE_DATA = {
     // Your full name as you'd like it displayed
-    name: 'Dr. Beatrix Bumble',
+    name: 'Shuoan.Liu',
 
     // A brief tagline describing your role or expertise (3-5 words/phrases)
-    tagline: "Avian-Feline Fluff Dynamics | Lead Investigator",
+    tagline: "FRM, 金融硕士, 网络工程师| 价值投资和区块链技术的坚定拥簇者",
 
     // Social media handles (username only, not full URL)
     // Set to empty string "" to hide an icon
