@@ -9,7 +9,7 @@ export const SITE_DATA = {
     name: 'Shuoan.Liu',
 
     // A brief tagline describing your role or expertise (3-5 words/phrases)
-    tagline: "FRM, 金融硕士, 网络工程师| 价值投资和区块链技术的坚定拥簇者",
+    tagline: "FRM, Master of Finance, Network Engineer| A staunch advocate of value investing and blockchain technology",
 
     // Social media handles (username only, not full URL)
     // Set to empty string "" to hide an icon
