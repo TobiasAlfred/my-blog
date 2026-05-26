@@ -21,6 +21,7 @@ const title = `${SITE_DATA.name}${pageTitle ? ` | ${pageTitle}` : ""}`;
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
+		<slot name="head" />
 		<script is:inline>
 			const theme = (() => {
 				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
