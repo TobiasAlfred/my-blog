@@ -63,6 +63,50 @@ main:has(.dashboard-container) {
   max-width: none !important;
 }
 
+/* ===== Header & Footer Dark Theme Overrides ===== */
+header {
+  background-color: var(--db-bg-primary) !important;
+  border-bottom-color: var(--db-border-card) !important;
+}
+
+header .nav-links a {
+  color: var(--db-text-primary) !important;
+}
+
+header .nav-links a:hover {
+  color: var(--db-accent-blue) !important;
+  background-color: rgba(56, 189, 248, 0.08) !important;
+}
+
+header .menu-toggle,
+header .theme-toggle,
+header .menu-close {
+  color: var(--db-text-primary) !important;
+}
+
+header .menu-toggle:hover,
+header .theme-toggle:hover {
+  color: var(--db-accent-blue) !important;
+}
+
+main {
+  background-color: var(--db-bg-primary) !important;
+}
+
+.footer-container {
+  background-color: var(--db-bg-primary) !important;
+  border-top-color: var(--db-border-card) !important;
+  color: var(--db-text-muted) !important;
+}
+
+.footer-socials a {
+  color: var(--db-text-muted) !important;
+}
+
+.footer-socials a:hover {
+  color: var(--db-accent-blue) !important;
+}
+
 /* Inner content wrapper */
 .db-content {
   max-width: 1400px;
