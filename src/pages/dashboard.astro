@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import '../styles/dashboard.css';
+---
+
+<Layout pageTitle="Dashboard" description="BTC Market Indicator Dashboard — 22-Metric Bottom Detection & Market Timing System">
+  <!-- JetBrains Mono font for the dashboard -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" slot="head">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin slot="head">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" slot="head">
+
+  <div class="dashboard-container">
+    <!-- Loading Overlay -->
+    <div class="db-loading-overlay" id="db-loading-overlay">
+      <div class="db-loading-spinner"></div>
+      <div class="db-loading-text">Loading 22 Metrics...</div>
+      <div class="db-loading-status" id="db-loading-status">Initializing</div>
+    </div>
+
+    <div class="db-content">
+      <header class="db-header">
+        <div class="db-brand">
+          <div class="db-btc-icon">&#x20BF;</div>
+          <div class="db-brand-text">
+            <h1>BTC Market Indicator Dashboard</h1>
+            <p>22-Metric Bottom Detection & Market Timing System</p>
+          </div>
+        </div>
+        <div class="db-last-updated">
+          <span class="db-live-dot" id="db-live-dot"></span>
+          <span id="db-update-time">Loading...</span>
+        </div>
+      </header>
+
+      <div class="db-legend-bar">
+        <div class="db-legend-item"><span class="db-legend-led bottom"></span><span>Bottom</span><span class="db-legend-count" id="count-bottom">0</span></div>
+        <div class="db-legend-item"><span class="db-legend-led dca"></span><span>DCA</span><span class="db-legend-count" id="count-dca">0</span></div>
+        <div class="db-legend-item"><span class="db-legend-led normal"></span><span>Normal</span><span class="db-legend-count" id="count-normal">0</span></div>
+        <div class="db-legend-item"><span class="db-legend-led mania"></span><span>Mania</span><span class="db-legend-count" id="count-mania">0</span></div>
+      </div>
+
+      <div class="db-grid" id="db-indicator-grid"></div>
+
+      <div class="db-notice-bar" id="db-notice-bar" style="display:none;">
+        <strong>All 22 indicators connected.</strong> Data sources: BGeometrics Premium, AHR999, Deribit, Binance, FRED.
+      </div>
+
+      <footer class="db-footer">
+        <p>Not financial advice. Data from BGeometrics & FRED.</p>
+        <div class="db-footer-right">v5.1 &middot; 22 Live</div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="../scripts/dashboard.js"></script>
+</Layout>
