@@ -9,7 +9,7 @@ export const SITE_DATA = {
     name: 'Shuoan.Liu',
 
     // A brief tagline describing your role or expertise (3-5 words/phrases)
-    tagline: "FRM, Master of Finance| Diligence&Perseverance",
+    tagline: "FRM, Master of Finance | Diligence&Perseverance",
 
     // Social media handles (username only, not full URL)
     // Set to empty string "" to hide an icon
