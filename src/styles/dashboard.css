@@ -210,6 +210,54 @@ main {
   color: var(--db-text-muted);
   font-family: 'JetBrains Mono', monospace;
   text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.db-update-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.db-refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--db-bg-card);
+  border: 1px solid var(--db-border-card);
+  border-radius: 6px;
+  color: var(--db-text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.db-refresh-btn:hover {
+  border-color: var(--db-accent-blue);
+  color: var(--db-accent-blue);
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.db-refresh-btn:active {
+  transform: scale(0.96);
+}
+
+.db-refresh-btn.refreshing {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.db-refresh-btn.refreshing .db-refresh-icon {
+  animation: db-refresh-spin 1s linear infinite;
+}
+
+@keyframes db-refresh-spin {
+  to { transform: rotate(360deg); }
 }
 
 .db-last-updated .db-live-dot {
@@ -550,7 +598,7 @@ main {
   .db-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .db-content { padding: 24px 16px 40px; }
   .db-header { flex-direction: column; align-items: flex-start; }
-  .db-last-updated { text-align: left; }
+  .db-last-updated { text-align: left; align-items: flex-start; }
 }
 
 @media (max-width: 479px) {

@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import '../styles/dashboard.css';
 ---
 
-<Layout pageTitle="Dashboard" description="BTC Market Indicator Dashboard — 22-Metric Bottom Detection & Market Timing System">
+<<Layout pageTitle="Dashboard" description="BTC Market Indicator Dashboard — 22-Metric Bottom Detection & Market Timing System">
   <!-- JetBrains Mono font for the dashboard -->
   <link rel="preconnect" href="https://fonts.googleapis.com" slot="head">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin slot="head">
@@ -28,8 +28,17 @@ import '../styles/dashboard.css';
           </div>
         </div>
         <div class="db-last-updated">
-          <span class="db-live-dot" id="db-live-dot"></span>
-          <span id="db-update-time">Loading...</span>
+          <div class="db-update-row">
+            <span class="db-live-dot" id="db-live-dot"></span>
+            <span id="db-update-time">Loading...</span>
+          </div>
+          <button class="db-refresh-btn" id="db-refresh-btn" title="Refresh all data from sources">
+            <svg class="db-refresh-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            <span>Update Data</span>
+          </button>
         </div>
       </header>
 

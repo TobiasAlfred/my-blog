@@ -882,9 +882,104 @@ async function init() {
   setTimeout(() => { if (loadingOverlay) loadingOverlay.classList.add('hidden'); }, 500);
 }
 
+// ===== Refresh All Data =====
+async function refreshAll() {
+  const loadingOverlay = document.getElementById('db-loading-overlay');
+  const loadingStatus = document.getElementById('db-loading-status');
+  const loadingText = document.querySelector('.db-loading-text');
+  const grid = document.getElementById('db-indicator-grid');
+  const noticeBar = document.getElementById('db-notice-bar');
+  const refreshBtn = document.getElementById('db-refresh-btn');
+  const updateTime = document.getElementById('db-update-time');
+  const liveDot = document.getElementById('db-live-dot');
+
+  if (!grid || !refreshBtn || refreshBtn.classList.contains('refreshing')) return;
+
+  refreshBtn.classList.add('refreshing');
+
+  // 1. 清除本地缓存
+  try {
+    localStorage.removeItem(CACHE_KEY);
+  } catch (e) {
+    console.warn('Cache clear failed:', e);
+  }
+
+  // 2. 显示 Loading 遮罩
+  if (loadingOverlay) loadingOverlay.classList.remove('hidden');
+  if (loadingStatus) loadingStatus.textContent = 'Clearing cache...';
+  if (loadingText) loadingText.textContent = 'Refreshing 22 Metrics...';
+
+  let results = [];
+  let hasExtApi = false;
+  let apiCallCount = 0;
+
+  // 3. 先渲染骨架屏
+  const skeletons = indicators.map(ind => ({
+    name: ind.name, sub: ind.sub, value: '', zone: 'normal', time: 'Fetching...', source: ind.source, isPlaceholder: false
+  }));
+  grid.innerHTML = renderGridContent(skeletons);
+
+  // 4. 强制逐个重新获取（null cache + forceRefresh=true）
+  for (let i = 0; i < indicators.length; i++) {
+    const ind = indicators[i];
+
+    if (ind.type === 'extapi') {
+      results[i] = { name: ind.name, sub: ind.sub, value: 'External API', zone: 'extapi', time: 'Requires API Key', source: 'static', isPlaceholder: true };
+      hasExtApi = true;
+    } else {
+      results[i] = await fetchIndicator(ind, i, null, true);
+      if (!results[i].isPlaceholder && !results[i].isError && ind.type !== 'computed') apiCallCount++;
+    }
+
+    if (results[i].isPlaceholder) hasExtApi = true;
+
+    // 实时更新单张卡片
+    const card = grid.querySelector(`.db-card[data-name="${ind.name}"]`);
+    if (card) card.outerHTML = renderCard(results[i]);
+
+    if (i < indicators.length - 1) await new Promise(r => setTimeout(r, 200));
+  }
+
+  // 5. 保存新缓存
+  const cacheData = {};
+  for (const result of results) {
+    if (!result.isPlaceholder && !result.isError && result.source !== 'computed') {
+      cacheData[result.name] = result;
+    }
+  }
+  saveCache(cacheData);
+
+  // 6. 更新 UI 状态
+  if (hasExtApi && noticeBar) noticeBar.style.display = 'block';
+  updateZoneCounts(results);
+
+  if (updateTime) {
+    const now = new Date();
+    updateTime.textContent = `Updated: ${now.toISOString().replace('T',' ').slice(0,16)} UTC (${apiCallCount} API calls)`;
+  }
+  if (liveDot) liveDot.className = 'db-live-dot';
+
+  // 7. 结束
+  setTimeout(() => {
+    if (loadingOverlay) loadingOverlay.classList.add('hidden');
+    refreshBtn.classList.remove('refreshing');
+  }, 500);
+}
+
+function setupRefreshButton() {
+  const btn = document.getElementById('db-refresh-btn');
+  if (btn) {
+    btn.addEventListener('click', refreshAll);
+  }
+}
+
 // ===== Initialize on DOM ready =====
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('DOMContentLoaded', () => {
+    init();
+    setupRefreshButton();
+  });
 } else {
   init();
+  setupRefreshButton();
 }
