@@ -95,10 +95,10 @@ function classifyZone(name, value) {
     if (value > 35) return 'normal';
     return 'mania';
   }
-  if (n.includes('l/s') || n.includes('long/short') || (n.includes('futures') && n.includes('ratio'))) {
-    if (value < 0.6) return 'bottom';
-    if (value < 0.9) return 'dca';
-    if (value < 1.3) return 'normal';
+  if (n.includes('futures global') || n.includes('long/short') || (n.includes('futures') && n.includes('ratio'))) {
+    if (value < 0.85) return 'bottom';
+    if (value < 1.0) return 'dca';
+    if (value < 2.0) return 'normal';
     return 'mania';
   }
   if (n.includes('hashrate') || n.includes('hash rate')) {
@@ -323,23 +323,14 @@ const indicators = [
     parseTime: d => d.d
   },
   {
-    name: 'Futures L/S Ratio',
-    sub: 'Binance Futures Global Long/Short Accounts Ratio',
+    name: 'Futures Global',
+    sub: 'Global Long/Short Account Ratio',
     category: 'sentiment',
-    source: 'binance',
-    endpoint: 'https://fapi.binance.com/futures/data/globalLongShortAccountRatio?symbol=BTCUSDT&period=1d&limit=1',
-    formatter: v => parseFloat(v).toFixed(4),
-    parseValue: d => {
-      const arr = Array.isArray(d) ? d : (d.data || []);
-      if (arr.length === 0) return null;
-      return parseFloat(arr[0].longShortRatio);
-    },
-    parseTime: d => {
-      const arr = Array.isArray(d) ? d : (d.data || []);
-      if (arr.length === 0) return null;
-      const ts = arr[0].timestamp;
-      return ts ? new Date(ts).toISOString().slice(0, 10) : 'N/A';
-    }
+    source: 'bgeometrics',
+    endpoint: 'https://api.bitcoin-data.com/v1/futures-global-1h/last',
+    formatter: v => parseFloat(v).toFixed(2),
+    parseValue: d => d.futuresGlobalLongShortRatio,
+    parseTime: d => d.d
   },
   // 3. Trend Signals (5)
   {
