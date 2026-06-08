@@ -1,120 +1,346 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const base = import.meta.env.BASE_URL;
 ---
 
 <Layout pageTitle="Presentations">
-    <div class="page-container">
-        <h1>Presentations</h1>
+  <link slot="head" rel="stylesheet" href={import.meta.env.BASE_URL + 'styles/presentations.css'} />
 
-        <p class="intro-text">
-            I present regularly at interspecies mechanics conferences, mythical conservation forums, and
-            biomechanics symposia. I have yet to give a talk where at least one audience member did not
-            initially assume the subject matter was not serious. By the end, none of them make that
-            mistake twice.
+  <div class="page-presentations">
+    <!-- Navigation -->
+    <nav class="shuoan-nav" id="shuoanNav">
+      <a href="#" class="shuoan-nav__brand" onclick="event.preventDefault(); window.scrollTo({top:0,behavior:'smooth'})">朔安</a>
+      <ul class="shuoan-nav__links">
+        <li><a href="#about">关于</a></li>
+        <li><a href="#skills">足迹</a></li>
+        <li><a href="#capabilities">能力</a></li>
+        <li><a href="#gallery">画廊</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="shuoan-hero" id="hero">
+      <div class="shuoan-hero__bg" id="heroBg">
+        <img src={import.meta.env.BASE_URL + "images/hero-bg.jpg"} alt="Hero background" />
+      </div>
+      <div class="shuoan-hero__overlay"></div>
+      <div class="shuoan-hero__content">
+        <p class="shuoan-hero__caption">DIGITAL NOMAD &amp; FINANCIAL IDEALIST</p>
+        <h1 class="shuoan-hero__title" id="heroTitle">
+          <span class="line"><span>我还是那个</span></span>
+          <span class="line"><span>眼里有光的少年</span></span>
+        </h1>
+        <p class="shuoan-hero__desc">
+          Hey，我是朔安。一个 37 岁却依然保持着 20 岁好奇心的金融从业者。我左手处理复杂的金融模型，右手搭建前沿的 AI 应用。如果你也对这个世界抱有理想，我们应该能成为很好的朋友。
         </p>
+        <div class="shuoan-hero__avatars">
+          <div class="shuoan-avatars">
+            <div class="shuoan-avatars__item" style="background: linear-gradient(135deg, hsl(30,40%,75%), hsl(60,35%,65%))"></div>
+            <div class="shuoan-avatars__item" style="background: linear-gradient(135deg, hsl(90,40%,75%), hsl(120,35%,65%))"></div>
+            <div class="shuoan-avatars__item" style="background: linear-gradient(135deg, hsl(150,40%,75%), hsl(180,35%,65%))"></div>
+            <div class="shuoan-avatars__item" style="background: linear-gradient(135deg, hsl(210,40%,75%), hsl(240,35%,65%))"></div>
+            <div class="shuoan-avatars__item" style="background: linear-gradient(135deg, hsl(270,40%,75%), hsl(300,35%,65%))"></div>
+          </div>
+          <a href="#about" class="shuoan-hero__cta" onclick="event.preventDefault(); document.querySelector('#about').scrollIntoView({behavior:'smooth'})">
+            了解更多 <span style="display:inline-block">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
 
-        <section>
-            <h2>Keynote Addresses</h2>
-            <ul class="custom-list">
-                <li>
-                    <a class="list-item-title" href={`${base}presentations/hoot-purr-overlap-zone.html`} target="_blank" rel="noopener noreferrer">
-                        The Hoot-Purr Overlap Zone: Acoustic Convergence Across Biological Kingdoms
-                    </a>
-                    <span class="list-item-description">
-                        Plenary Keynote — International Symposium on Interspecies Physics, Geneva, 2026
-                        <span class="extra-links">
-                            Presenting the full unified field theory of low-frequency vibration; accompanied by live spectrograms from field recordings of synchronised owl-cat vocalisation events
-                        </span>
-                    </span>
-                </li>
-                <li>
-                    <a class="list-item-title" href={`${base}presentations/soft-matter-hard-science.html`} target="_blank" rel="noopener noreferrer">
-                        Soft Matter, Hard Science: Redefining Biomechanical Parameters for Fluffy Systems
-                    </a>
-                    <span class="list-item-description">
-                        Opening Keynote — Annual Meeting of the Society for Theoretical Zoology, Edinburgh, 2024
-                        <span class="extra-links">
-                            Overview of the Kinematics of Soft Systems framework and its application across avian, feline, and mythical taxa
-                        </span>
-                    </span>
-                </li>
-            </ul>
-        </section>
+    <!-- About Section -->
+    <section class="shuoan-about" id="about">
+      <div class="shuoan-about__inner">
+        <div class="shuoan-about__left">
+          <div class="shuoan-about__image" id="aboutImg">
+            <img src={import.meta.env.BASE_URL + "images/about-cafe.jpg"} alt="朔安在咖啡馆" />
+          </div>
+          <div class="shuoan-tags" id="aboutTags">
+            <span class="shuoan-tag">做事较真</span>
+            <span class="shuoan-tag">代码诗人</span>
+            <span class="shuoan-tag">德语通</span>
+            <span class="shuoan-tag">保持好奇</span>
+            <span class="shuoan-tag">观察细心</span>
+            <span class="shuoan-tag">理想主义者</span>
+            <span class="shuoan-tag">金融从业者</span>
+            <span class="shuoan-tag">AI 探索者</span>
+          </div>
+        </div>
+        <div class="shuoan-about__right">
+          <p class="shuoan-section-caption">ABOUT ME</p>
+          <h2 class="shuoan-section-title" id="aboutTitle">
+            <span class="line"><span>认识朔安</span></span>
+            <span class="line"><span>不设边界，保持纯粹。</span></span>
+          </h2>
+          <div class="shuoan-about__text">
+            <p>从金融行业的严谨逻辑，到对计算机网络底层协议的痴迷；从能用德语思考哲学问题，到相信 AI 能让更多人实现创作自由。我的世界里没有"不可能"，只有"还没找到方法"。</p>
+            <p>十年前进入金融行业时，我以为自己会一直做一个传统的金融分析师。但好奇心驱使我不断向外探索——我学习了计算机网络，从零开始搭建服务器；我精进德语和英语，让自己能直接阅读海森堡的物理原稿和卡夫卡的梦境；我深入 AI 领域，相信技术能让创意民主化。</p>
+            <p>37 岁的我，依然保持着 20 岁时的那份热忱。我相信年龄只是一个数字，真正重要的是你对世界的好奇心和持续学习的动力。</p>
+          </div>
+          <div class="shuoan-form">
+            <p class="shuoan-section-caption">GET IN TOUCH</p>
+            <div class="shuoan-form__grid">
+              <input type="text" class="shuoan-form__input" placeholder="你的名字" />
+              <input type="email" class="shuoan-form__input" placeholder="你的邮箱" />
+            </div>
+            <button class="shuoan-form__btn">给我留言</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section>
-            <h2>Conference Presentations</h2>
-            <ul class="custom-list">
-                <li>
-                    <span class="list-item-title">
-                        Mapping the Bioluminescent Corridors: Three Years of Unicorn Migration Data
-                    </span>
-                    <span class="list-item-description">Monoceros Initiative Symposium, Reykjavík, 2025</span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        η<sub>loaf</sub> = 0.94: Why the Loaf Position Is an Evolutionary Optimum
-                    </span>
-                    <span class="list-item-description">Advanced Biomechanics of Cuteness Conference, Amsterdam, 2024</span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        Bio-Fluidic Solids: Empirical Evidence for the Liquid Cat Hypothesis
-                    </span>
-                    <span class="list-item-description">Journal of Non-Newtonian Biomechanics Annual Conference, Zurich, 2022</span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        Wing-Loading Limits for Large Mythical Ungulates: A Finite-Element Approach
-                    </span>
-                    <span class="list-item-description">Proceedings of the Institute of Mythical Aerodynamics, Virtual, 2021</span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        Stardust Lattices: Novel Photonic Microstructures in High-Altitude Mythical Fauna
-                    </span>
-                    <span class="list-item-description">Theoretical Zoology Review Colloquium, Vienna, 2023</span>
-                </li>
-            </ul>
-        </section>
+    <!-- Skills Header -->
+    <section class="shuoan-skills-header" id="skills">
+      <p class="shuoan-section-caption">CAPABILITIES</p>
+      <h2 class="shuoan-section-title" id="skillsTitle">
+        <span class="line"><span>不只是</span></span>
+        <span class="line"><span>你以为的样子</span></span>
+      </h2>
+    </section>
 
-        <section>
-            <h2>Seminars &amp; Colloquia</h2>
-            <ul class="custom-list">
-                <li>
-                    <span class="list-item-title">
-                        Silent Flight, Silent Stalk: A Comparative Predator Kinematics Seminar
-                    </span>
-                    <span class="list-item-description">
-                        Laboratory for Avian &amp; Feline Dynamics, Institute of Mythical Studies, 2025
-                        <span class="extra-links">
-                            Internal seminar introducing the S<sub>f</sub>/S<sub>s</sub> comparative framework to new lab members and visiting fellows
-                        </span>
-                    </span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        Fluff-Density Tomography: Protocol and Calibration Workshop
-                    </span>
-                    <span class="list-item-description">
-                        Department of Theoretical Zoology, University of Owlford, 2019
-                        <span class="extra-links">
-                            Hands-on workshop introducing the FDT protocol; now adopted as the departmental standard for soft-tissue biomechanical scanning
-                        </span>
-                    </span>
-                </li>
-                <li>
-                    <span class="list-item-title">
-                        Field Observation Without Disturbance: 500 Hours Among Barn Owls and Barn Cats
-                    </span>
-                    <span class="list-item-description">
-                        Mythical Conservation Society Annual Lecture, London, 2022
-                        <span class="extra-links">
-                            Public lecture presented upon receipt of the Apex Observer Award; covered methodology, findings, and ethical field protocols
-                        </span>
-                    </span>
-                </li>
-            </ul>
-        </section>
-    </div>
+    <!-- Skill 01: Finance -->
+    <section class="shuoan-skill" id="capabilities" data-skill="1">
+      <div class="shuoan-skill__sticky">
+        <div class="shuoan-skill__bg">
+          <img src={import.meta.env.BASE_URL + "images/skill-finance.jpg"} alt="Finance" />
+        </div>
+        <div class="shuoan-skill__overlay"></div>
+        <div class="shuoan-skill__content">
+          <div class="shuoan-glass-card shuoan-glass-card--right">
+            <div class="shuoan-glass-card__meta">
+              <span class="shuoan-glass-card__num">01</span>
+              <span class="shuoan-glass-card__label">FINANCE</span>
+            </div>
+            <h3 class="shuoan-glass-card__title">金融</h3>
+            <p class="shuoan-glass-card__desc">在数字洪流中寻找锚点。十年金融从业经历，让我懂得在不确定性中建立秩序。我不只关注数字的涨跌，更关注价值背后的人性与逻辑。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skill 02: Language -->
+    <section class="shuoan-skill" data-skill="2">
+      <div class="shuoan-skill__sticky">
+        <div class="shuoan-skill__bg">
+          <img src={import.meta.env.BASE_URL + "images/skill-language.jpg"} alt="Language" />
+        </div>
+        <div class="shuoan-skill__overlay"></div>
+        <div class="shuoan-skill__content">
+          <div class="shuoan-glass-card shuoan-glass-card--left">
+            <div class="shuoan-glass-card__meta">
+              <span class="shuoan-glass-card__num">02</span>
+              <span class="shuoan-glass-card__label">LANGUAGE</span>
+            </div>
+            <h3 class="shuoan-glass-card__title">语言</h3>
+            <p class="shuoan-glass-card__desc">语言是通往另一种思维的钥匙。流利驾驭德语与英语，让我能直接阅读海森堡的物理原稿，或是卡夫卡未经翻译的梦境。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skill 03: Technology -->
+    <section class="shuoan-skill" data-skill="3">
+      <div class="shuoan-skill__sticky">
+        <div class="shuoan-skill__bg">
+          <img src={import.meta.env.BASE_URL + "images/skill-tech.jpg"} alt="Technology" />
+        </div>
+        <div class="shuoan-skill__overlay"></div>
+        <div class="shuoan-skill__content">
+          <div class="shuoan-glass-card shuoan-glass-card--right">
+            <div class="shuoan-glass-card__meta">
+              <span class="shuoan-glass-card__num">03</span>
+              <span class="shuoan-glass-card__label">TECHNOLOGY</span>
+            </div>
+            <h3 class="shuoan-glass-card__title">技术</h3>
+            <p class="shuoan-glass-card__desc">从网络协议到人工智能。我相信技术应当是温暖且普惠的。我擅长将复杂的系统拆解，并用优雅的代码重构生活的便利。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="shuoan-gallery" id="gallery">
+      <div class="shuoan-gallery__inner">
+        <div class="shuoan-gallery__header">
+          <p class="shuoan-section-caption">GALLERY</p>
+          <h2 class="shuoan-section-title" id="galleryTitle">
+            <span class="line"><span>生活碎片</span></span>
+          </h2>
+        </div>
+        <div class="shuoan-gallery__grid">
+          <div class="shuoan-gallery__item">
+            <div class="shuoan-gallery__thumb" style="aspect-ratio: 4/3;">
+              <img src={import.meta.env.BASE_URL + "images/life-subway.jpg"} alt="在路上的宁静" />
+            </div>
+            <div class="shuoan-gallery__info">
+              <span class="shuoan-gallery__name">在路上的宁静</span>
+              <span class="shuoan-gallery__date">2024.06</span>
+            </div>
+          </div>
+          <div class="shuoan-gallery__item">
+            <div class="shuoan-gallery__thumb" style="aspect-ratio: 4/3;">
+              <img src={import.meta.env.BASE_URL + "images/life-studio.jpg"} alt="午后工作室" />
+            </div>
+            <div class="shuoan-gallery__info">
+              <span class="shuoan-gallery__name">午后工作室</span>
+              <span class="shuoan-gallery__date">2024.08</span>
+            </div>
+          </div>
+          <div class="shuoan-gallery__item">
+            <div class="shuoan-gallery__thumb" style="aspect-ratio: 3/4;">
+              <img src={import.meta.env.BASE_URL + "images/life-jazz.jpg"} alt="深夜爵士灵感" />
+            </div>
+            <div class="shuoan-gallery__info">
+              <span class="shuoan-gallery__name">深夜爵士灵感</span>
+              <span class="shuoan-gallery__date">2024.09</span>
+            </div>
+          </div>
+          <div class="shuoan-gallery__item">
+            <div class="shuoan-gallery__thumb" style="aspect-ratio: 4/3;">
+              <img src={import.meta.env.BASE_URL + "images/life-camping.jpg"} alt="星空下的篝火" />
+            </div>
+            <div class="shuoan-gallery__info">
+              <span class="shuoan-gallery__name">星空下的篝火</span>
+              <span class="shuoan-gallery__date">2024.10</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="shuoan-cta">
+      <div class="shuoan-cta__bg" id="ctaBg">
+        <img src={import.meta.env.BASE_URL + "images/footer-bg.jpg"} alt="Footer background" />
+      </div>
+      <div class="shuoan-cta__overlay"></div>
+      <div class="shuoan-cta__content">
+        <h2 class="shuoan-cta__title" id="ctaTitle">
+          <span class="line"><span>保持好奇，保持饥饿。</span></span>
+        </h2>
+        <a href="mailto:hello@shuoan.me" class="shuoan-cta__email">hello@shuoan.me</a>
+      </div>
+    </section>
+
+    <!-- Page Footer -->
+    <footer class="shuoan-page-footer">
+      <div class="shuoan-page-footer__inner">
+        <span class="shuoan-page-footer__copyright">&copy; 2024 朔安. All rights reserved.</span>
+        <button class="shuoan-page-footer__top" id="backToTop">
+          返回顶部
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M6 10V2M6 2L2 6M6 2L10 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <script is:inline>
+    (function() {
+      'use strict';
+
+      // Nav scroll effect
+      var nav = document.getElementById('shuoanNav');
+      function onScroll() {
+        if (window.scrollY > 100) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Back to top
+      document.getElementById('backToTop').addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Hero entrance
+      function triggerHero() {
+        setTimeout(function() {
+          document.getElementById('heroTitle').classList.add('visible');
+        }, 300);
+        var heroBg = document.querySelector('#heroBg img');
+        if (heroBg) {
+          heroBg.style.transform = 'scale(1.08)';
+          heroBg.style.transition = 'transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              heroBg.style.transform = 'scale(1)';
+            });
+          });
+        }
+      }
+
+      // Intersection Observer helper
+      function observe(selector, callback) {
+        var elements = document.querySelectorAll(selector);
+        if (!elements.length) return;
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              callback(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        elements.forEach(function(el) { observer.observe(el); });
+      }
+
+      observe('.shuoan-section-title', function(el) { el.classList.add('visible'); });
+      observe('.shuoan-about__image', function(el) { el.classList.add('visible'); });
+      observe('.shuoan-tags', function(el) { el.classList.add('visible'); });
+      observe('.shuoan-gallery__item', function(el) { el.classList.add('visible'); });
+
+      // Parallax for skill sections
+      document.querySelectorAll('.shuoan-skill').forEach(function(section) {
+        var bg = section.querySelector('.shuoan-skill__bg');
+        var card = section.querySelector('.shuoan-glass-card');
+        if (!bg || !card) return;
+
+        function update() {
+          var rect = section.getBoundingClientRect();
+          var sectionH = section.offsetHeight;
+          var progress = Math.max(0, Math.min(1, -rect.top / (sectionH - window.innerHeight)));
+          bg.style.transform = 'translateY(' + (-15 + progress * 30) + '%)';
+          card.style.opacity = String(0.2 + progress * 0.8);
+          card.style.transform = 'scale(' + (0.98 + progress * 0.02) + ') translateY(' + (60 - progress * 120) + 'px)';
+        }
+
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+          if (!ticking) {
+            requestAnimationFrame(function() { update(); ticking = false; });
+            ticking = true;
+          }
+        }, { passive: true });
+        update();
+      });
+
+      // CTA parallax
+      var ctaBg = document.getElementById('ctaBg');
+      if (ctaBg) {
+        var ctaSection = ctaBg.closest('.shuoan-cta');
+        function updateCta() {
+          var rect = ctaSection.getBoundingClientRect();
+          var progress = Math.max(0, Math.min(1, -rect.top / (ctaSection.offsetHeight - window.innerHeight)));
+          ctaBg.style.transform = 'scale(' + (1.1 - progress * 0.1) + ')';
+        }
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+          if (!ticking) {
+            requestAnimationFrame(function() { updateCta(); ticking = false; });
+            ticking = true;
+          }
+        }, { passive: true });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', triggerHero);
+      } else {
+        triggerHero();
+      }
+    })();
+  </script>
 </Layout>
