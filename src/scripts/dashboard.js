@@ -2,6 +2,7 @@
 // Extracted and adapted for Astro Scholar embedding
 
 // ===== Zone Classification Logic =====
+const PROXY_BASE = 'https://proxy.liushuoan.com/?url=';  // 你的 Worker 地址
 function classifyZone(name, value) {
   const n = name.toLowerCase();
   if (n.includes('mvrv')) {
@@ -618,7 +619,7 @@ async function fetchIndicator(indicator, index, cache, forceRefresh) {
       const now = Date.now();
       const startMs = now - 7 * 24 * 60 * 60 * 1000;
       const directUrl = `${indicator.endpoint}?currency=BTC&start_timestamp=${startMs}&end_timestamp=${now}&resolution=1D`;
-      const proxyUrl = 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(directUrl);
+      const proxyUrl = PROXY_BASE + encodeURIComponent(directUrl);
       const response = await fetchWithTimeout(proxyUrl, {}, 12000);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
@@ -637,7 +638,7 @@ async function fetchIndicator(indicator, index, cache, forceRefresh) {
 
   if (indicator.source === 'binance') {
     try {
-      const proxyUrl = 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(indicator.endpoint);
+      const proxyUrl = PROXY_BASE + encodeURIComponent(indicator.endpoint);
       const response = await fetchWithTimeout(proxyUrl, {}, 12000);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
@@ -656,7 +657,7 @@ async function fetchIndicator(indicator, index, cache, forceRefresh) {
 
   if (indicator.source === 'ahr999') {
     try {
-      const proxyUrl = 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(indicator.endpoint);
+      const proxyUrl = PROXY_BASE + encodeURIComponent(indicator.endpoint);
       const response = await fetchWithTimeout(proxyUrl, {}, 10000);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
