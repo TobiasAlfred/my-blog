@@ -89,10 +89,10 @@ function classifyZone(name, value) {
     if (value < 15000) return 'normal';
     return 'mania';
   }
-  if (n.includes('options') || n.includes('dvol')) {
-    if (value > 80) return 'bottom';
-    if (value > 45) return 'dca';
-    if (value > 25) return 'normal';
+  if (n.includes('options') || n.includes('dvol') || n.includes('atmiv')) {
+    if (value > 75) return 'bottom';
+    if (value > 50) return 'dca';
+    if (value > 35) return 'normal';
     return 'mania';
   }
   if (n.includes('l/s') || n.includes('long/short') || (n.includes('futures') && n.includes('ratio'))) {
@@ -313,25 +313,14 @@ const indicators = [
     parseValue: d => d.fearGreed
   },
   {
-    name: 'BTC Options IV',
-    sub: 'Deribit DVOL - 30d ATM Implied Volatility',
+    name: 'atmIv (Options Day)',
+    sub: 'BTC 30-Day ATM Implied Volatility',
     category: 'sentiment',
-    source: 'deribit',
-    endpoint: 'https://www.deribit.com/api/v2/public/get_volatility_index_data',
+    source: 'bgeometrics',
+    endpoint: 'https://api.bitcoin-data.com/v1/options-day/last',
     formatter: v => `${parseFloat(v).toFixed(2)}%`,
-    parseValue: d => {
-      const arr = d.result?.data;
-      if (!Array.isArray(arr) || arr.length === 0) return null;
-      const last = arr[arr.length - 1];
-      return last[4];
-    },
-    parseTime: d => {
-      const arr = d.result?.data;
-      if (!Array.isArray(arr) || arr.length === 0) return null;
-      const last = arr[arr.length - 1];
-      const ts = last[0];
-      return new Date(ts).toISOString().slice(0, 10);
-    }
+    parseValue: d => d.atmIv,
+    parseTime: d => d.d
   },
   {
     name: 'Futures L/S Ratio',
