@@ -319,7 +319,7 @@ const indicators = [
     source: 'bgeometrics',
     endpoint: 'https://api.bitcoin-data.com/v1/options-day/last',
     formatter: v => `${parseFloat(v).toFixed(2)}%`,
-    parseValue: d => d.atmIv,
+    parseValue: d => d.atmIv * 100,
     parseTime: d => d.d
   },
   {
