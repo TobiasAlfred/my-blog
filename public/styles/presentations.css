@@ -376,14 +376,9 @@ body.page-presentations {
   overflow: hidden;
   border-radius: 8px;
   margin-bottom: 24px;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.shuoan-about__image.visible {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .shuoan-about__image img {
@@ -396,14 +391,9 @@ body.page-presentations {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
-}
-
-.shuoan-tags.visible {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
 }
 
 .shuoan-tag {
@@ -465,6 +455,8 @@ body.page-presentations {
 
 .shuoan-about__text p {
   margin-bottom: 16px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Form */
@@ -603,7 +595,7 @@ body.page-presentations {
   padding: 40px 48px;
   max-width: 500px;
   width: 100%;
-  opacity: 0.2;
+  opacity: 1;
   transform: scale(0.98) translateY(60px);
 }
 
@@ -674,7 +666,7 @@ body.page-presentations {
 
 /* ========== GALLERY ========== */
 .shuoan-gallery {
-  padding: 0 48px 120px;        /* 上0 右48 下120 左48 —— 去掉顶部padding */
+  padding: 120px 48px;
   background-color: var(--shuoan-bg-dark);
 }
 
@@ -697,14 +689,9 @@ body.page-presentations {
 
 .shuoan-gallery__item {
   cursor: pointer;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.shuoan-gallery__item.visible {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .shuoan-gallery__item:nth-child(2).visible {
@@ -758,7 +745,7 @@ body.page-presentations {
 
 @media (max-width: 636px) {
   .shuoan-gallery {
-    padding: 0 20px 80px;       /* 上0 右20 下80 左20 */
+    padding: 80px 20px;
   }
   .shuoan-gallery__grid {
     grid-template-columns: 1fr;
@@ -822,12 +809,8 @@ body.page-presentations {
 
 .shuoan-cta__title .line span {
   display: block;
-  transform: translateY(100%);
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.shuoan-cta__title.visible .line span {
   transform: translateY(0);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .shuoan-cta__email {
