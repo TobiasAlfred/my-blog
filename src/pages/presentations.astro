@@ -16,12 +16,23 @@
     <nav class="shuoan-nav" id="shuoanNav">
       <a href="#" class="shuoan-nav__brand" onclick="event.preventDefault(); window.scrollTo({top:0,behavior:'smooth'})">朔安</a>
       <ul class="shuoan-nav__links">
+        <li><a href={`${import.meta.env.BASE_URL}`}>主页</a></li>
         <li><a href="#about">关于</a></li>
         <li><a href="#skills">足迹</a></li>
-        <li><a href="#capabilities">能力</a></li>
         <li><a href="#gallery">画廊</a></li>
       </ul>
+      <button class="shuoan-nav__menu" id="mobileMenu" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="shuoan-mobile-overlay" id="mobileOverlay">
+      <a href={`${import.meta.env.BASE_URL}`}>主页</a>
+      <a href="#about">关于</a>
+      <a href="#skills">足迹</a>
+      <a href="#gallery">画廊</a>
+    </div>
 
     <!-- Hero Section -->
     <section class="shuoan-hero" id="hero">
@@ -94,7 +105,7 @@
       </div>
     </section>
 
-    <!-- Skills Header -->
+    <!-- Skills Section Header -->
     <section class="shuoan-skills-header" id="skills">
       <p class="shuoan-section-caption">CAPABILITIES</p>
       <h2 class="shuoan-section-title" id="skillsTitle">
@@ -104,7 +115,7 @@
     </section>
 
     <!-- Skill 01: Finance -->
-    <section class="shuoan-skill" id="capabilities" data-skill="1">
+    <section class="shuoan-skill" data-skill="1">
       <div class="shuoan-skill__sticky">
         <div class="shuoan-skill__bg">
           <img src={import.meta.env.BASE_URL + "images/skill-finance.jpg"} alt="Finance" />
@@ -163,6 +174,9 @@
       </div>
     </section>
 
+    <!-- Transition: skills to gallery -->
+    <div class="shuoan-transition"></div>
+
     <!-- Gallery Section -->
     <section class="shuoan-gallery" id="gallery">
       <div class="shuoan-gallery__inner">
@@ -220,7 +234,7 @@
       </div>
       <div class="shuoan-cta__overlay"></div>
       <div class="shuoan-cta__content">
-        <h2 class="shuoan-cta__title" id="ctaTitle">
+        <h2 class="shuoan-cta__title shuoan-section-title" id="ctaTitle">
           <span class="line"><span>保持好奇，保持饥饿。</span></span>
         </h2>
         <a href="mailto:hello@shuoan.me" class="shuoan-cta__email">hello@shuoan.me</a>
@@ -244,52 +258,52 @@
       (function() {
         'use strict';
 
-        // Nav scroll effect
         var nav = document.getElementById('shuoanNav');
         function onScroll() {
-          if (window.scrollY > 100) {
-            nav.classList.add('scrolled');
-          } else {
-            nav.classList.remove('scrolled');
-          }
+          if (window.scrollY > 100) { nav.classList.add('scrolled'); }
+          else { nav.classList.remove('scrolled'); }
         }
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
 
-        // Back to top
+        var menuBtn = document.getElementById('mobileMenu');
+        var mobileOverlay = document.getElementById('mobileOverlay');
+        if (menuBtn && mobileOverlay) {
+          menuBtn.addEventListener('click', function() {
+            menuBtn.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileOverlay.classList.contains('active') ? 'hidden' : '';
+          });
+          mobileOverlay.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+              menuBtn.classList.remove('active');
+              mobileOverlay.classList.remove('active');
+              document.body.style.overflow = '';
+            });
+          });
+n        }
+
         document.getElementById('backToTop').addEventListener('click', function() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Hero entrance
         function triggerHero() {
-          setTimeout(function() {
-            document.getElementById('heroTitle').classList.add('visible');
-          }, 300);
+          setTimeout(function() { document.getElementById('heroTitle').classList.add('visible'); }, 300);
           var heroBg = document.querySelector('#heroBg img');
           if (heroBg) {
             heroBg.style.transform = 'scale(1.08)';
             heroBg.style.transition = 'transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
-            requestAnimationFrame(function() {
-              requestAnimationFrame(function() {
-                heroBg.style.transform = 'scale(1)';
-              });
-            });
+            requestAnimationFrame(function() { requestAnimationFrame(function() { heroBg.style.transform = 'scale(1)'; }); });
           }
         }
 
-        // Intersection Observer helper
-        function observe(selector, callback) {
+        function observe(selector, callback, options) {
+          options = options || { threshold: 0.15 };
           var elements = document.querySelectorAll(selector);
           if (!elements.length) return;
           var observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-              if (entry.isIntersecting) {
-                callback(entry.target);
-                observer.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.15 });
+            entries.forEach(function(entry) { if (entry.isIntersecting) { callback(entry.target); observer.unobserve(entry.target); } });
+          }, options);
           elements.forEach(function(el) { observer.observe(el); });
         }
 
@@ -298,12 +312,10 @@
         observe('.shuoan-tags', function(el) { el.classList.add('visible'); });
         observe('.shuoan-gallery__item', function(el) { el.classList.add('visible'); });
 
-        // Parallax for skill sections
         document.querySelectorAll('.shuoan-skill').forEach(function(section) {
           var bg = section.querySelector('.shuoan-skill__bg');
           var card = section.querySelector('.shuoan-glass-card');
           if (!bg || !card) return;
-
           function update() {
             var rect = section.getBoundingClientRect();
             var sectionH = section.offsetHeight;
@@ -312,18 +324,13 @@
             card.style.opacity = String(0.2 + progress * 0.8);
             card.style.transform = 'scale(' + (0.98 + progress * 0.02) + ') translateY(' + (60 - progress * 120) + 'px)';
           }
-
           var ticking = false;
           window.addEventListener('scroll', function() {
-            if (!ticking) {
-              requestAnimationFrame(function() { update(); ticking = false; });
-              ticking = true;
-            }
+            if (!ticking) { requestAnimationFrame(function() { update(); ticking = false; }); ticking = true; }
           }, { passive: true });
           update();
         });
 
-        // CTA parallax
         var ctaBg = document.getElementById('ctaBg');
         if (ctaBg) {
           var ctaSection = ctaBg.closest('.shuoan-cta');
@@ -334,18 +341,28 @@
           }
           var ticking = false;
           window.addEventListener('scroll', function() {
-            if (!ticking) {
-              requestAnimationFrame(function() { updateCta(); ticking = false; });
-              ticking = true;
-            }
+            if (!ticking) { requestAnimationFrame(function() { updateCta(); ticking = false; }); ticking = true; }
           }, { passive: true });
         }
 
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', triggerHero);
-        } else {
-          triggerHero();
+        var aboutTexts = document.querySelectorAll('.shuoan-about__text p');
+        aboutTexts.forEach(function(p, i) {
+          p.style.opacity = '0'; p.style.transform = 'translateY(20px)';
+          p.style.transition = 'opacity 0.6s ease ' + (i * 0.15) + 's, transform 0.6s ease ' + (i * 0.15) + 's';
+          observe('.shuoan-about__text', function() {
+            aboutTexts.forEach(function(el) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
+          });
+        });
+
+        var heroContent = document.querySelector('.shuoan-hero__content');
+        if (heroContent) {
+          heroContent.style.opacity = '0'; heroContent.style.transform = 'translateY(40px)';
+          heroContent.style.transition = 'opacity 1s ease 0.4s, transform 1s ease 0.4s';
+          setTimeout(function() { heroContent.style.opacity = '1'; heroContent.style.transform = 'translateY(0)'; }, 100);
         }
+
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', triggerHero); }
+        else { triggerHero(); }
       })();
     </script>
   </body>
