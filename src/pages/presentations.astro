@@ -1,11 +1,17 @@
----
-import Layout from '../layouts/Layout.astro';
----
-
-<Layout pageTitle="Presentations">
-  <link slot="head" rel="stylesheet" href={import.meta.env.BASE_URL + 'styles/presentations.css'} />
-
-  <div class="page-presentations">
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <title>朔安 | ShuoAn - Presentations</title>
+    <meta name="description" content="Hey，我是朔安。一个 37 岁却依然保持着 20 岁好奇心的金融从业者。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href={import.meta.env.BASE_URL + 'styles/presentations.css'} />
+  </head>
+  <body class="page-presentations">
     <!-- Navigation -->
     <nav class="shuoan-nav" id="shuoanNav">
       <a href="#" class="shuoan-nav__brand" onclick="event.preventDefault(); window.scrollTo({top:0,behavior:'smooth'})">朔安</a>
@@ -233,114 +239,114 @@ import Layout from '../layouts/Layout.astro';
         </button>
       </div>
     </footer>
-  </div>
 
-  <script is:inline>
-    (function() {
-      'use strict';
+    <script is:inline>
+      (function() {
+        'use strict';
 
-      // Nav scroll effect
-      var nav = document.getElementById('shuoanNav');
-      function onScroll() {
-        if (window.scrollY > 100) {
-          nav.classList.add('scrolled');
-        } else {
-          nav.classList.remove('scrolled');
+        // Nav scroll effect
+        var nav = document.getElementById('shuoanNav');
+        function onScroll() {
+          if (window.scrollY > 100) {
+            nav.classList.add('scrolled');
+          } else {
+            nav.classList.remove('scrolled');
+          }
         }
-      }
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
-      // Back to top
-      document.getElementById('backToTop').addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+        // Back to top
+        document.getElementById('backToTop').addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-      // Hero entrance
-      function triggerHero() {
-        setTimeout(function() {
-          document.getElementById('heroTitle').classList.add('visible');
-        }, 300);
-        var heroBg = document.querySelector('#heroBg img');
-        if (heroBg) {
-          heroBg.style.transform = 'scale(1.08)';
-          heroBg.style.transition = 'transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
-          requestAnimationFrame(function() {
+        // Hero entrance
+        function triggerHero() {
+          setTimeout(function() {
+            document.getElementById('heroTitle').classList.add('visible');
+          }, 300);
+          var heroBg = document.querySelector('#heroBg img');
+          if (heroBg) {
+            heroBg.style.transform = 'scale(1.08)';
+            heroBg.style.transition = 'transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
             requestAnimationFrame(function() {
-              heroBg.style.transform = 'scale(1)';
+              requestAnimationFrame(function() {
+                heroBg.style.transform = 'scale(1)';
+              });
             });
-          });
+          }
         }
-      }
 
-      // Intersection Observer helper
-      function observe(selector, callback) {
-        var elements = document.querySelectorAll(selector);
-        if (!elements.length) return;
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              callback(entry.target);
-              observer.unobserve(entry.target);
+        // Intersection Observer helper
+        function observe(selector, callback) {
+          var elements = document.querySelectorAll(selector);
+          if (!elements.length) return;
+          var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                callback(entry.target);
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.15 });
+          elements.forEach(function(el) { observer.observe(el); });
+        }
+
+        observe('.shuoan-section-title', function(el) { el.classList.add('visible'); });
+        observe('.shuoan-about__image', function(el) { el.classList.add('visible'); });
+        observe('.shuoan-tags', function(el) { el.classList.add('visible'); });
+        observe('.shuoan-gallery__item', function(el) { el.classList.add('visible'); });
+
+        // Parallax for skill sections
+        document.querySelectorAll('.shuoan-skill').forEach(function(section) {
+          var bg = section.querySelector('.shuoan-skill__bg');
+          var card = section.querySelector('.shuoan-glass-card');
+          if (!bg || !card) return;
+
+          function update() {
+            var rect = section.getBoundingClientRect();
+            var sectionH = section.offsetHeight;
+            var progress = Math.max(0, Math.min(1, -rect.top / (sectionH - window.innerHeight)));
+            bg.style.transform = 'translateY(' + (-15 + progress * 30) + '%)';
+            card.style.opacity = String(0.2 + progress * 0.8);
+            card.style.transform = 'scale(' + (0.98 + progress * 0.02) + ') translateY(' + (60 - progress * 120) + 'px)';
+          }
+
+          var ticking = false;
+          window.addEventListener('scroll', function() {
+            if (!ticking) {
+              requestAnimationFrame(function() { update(); ticking = false; });
+              ticking = true;
             }
-          });
-        }, { threshold: 0.15 });
-        elements.forEach(function(el) { observer.observe(el); });
-      }
+          }, { passive: true });
+          update();
+        });
 
-      observe('.shuoan-section-title', function(el) { el.classList.add('visible'); });
-      observe('.shuoan-about__image', function(el) { el.classList.add('visible'); });
-      observe('.shuoan-tags', function(el) { el.classList.add('visible'); });
-      observe('.shuoan-gallery__item', function(el) { el.classList.add('visible'); });
-
-      // Parallax for skill sections
-      document.querySelectorAll('.shuoan-skill').forEach(function(section) {
-        var bg = section.querySelector('.shuoan-skill__bg');
-        var card = section.querySelector('.shuoan-glass-card');
-        if (!bg || !card) return;
-
-        function update() {
-          var rect = section.getBoundingClientRect();
-          var sectionH = section.offsetHeight;
-          var progress = Math.max(0, Math.min(1, -rect.top / (sectionH - window.innerHeight)));
-          bg.style.transform = 'translateY(' + (-15 + progress * 30) + '%)';
-          card.style.opacity = String(0.2 + progress * 0.8);
-          card.style.transform = 'scale(' + (0.98 + progress * 0.02) + ') translateY(' + (60 - progress * 120) + 'px)';
+        // CTA parallax
+        var ctaBg = document.getElementById('ctaBg');
+        if (ctaBg) {
+          var ctaSection = ctaBg.closest('.shuoan-cta');
+          function updateCta() {
+            var rect = ctaSection.getBoundingClientRect();
+            var progress = Math.max(0, Math.min(1, -rect.top / (ctaSection.offsetHeight - window.innerHeight)));
+            ctaBg.style.transform = 'scale(' + (1.1 - progress * 0.1) + ')';
+          }
+          var ticking = false;
+          window.addEventListener('scroll', function() {
+            if (!ticking) {
+              requestAnimationFrame(function() { updateCta(); ticking = false; });
+              ticking = true;
+            }
+          }, { passive: true });
         }
 
-        var ticking = false;
-        window.addEventListener('scroll', function() {
-          if (!ticking) {
-            requestAnimationFrame(function() { update(); ticking = false; });
-            ticking = true;
-          }
-        }, { passive: true });
-        update();
-      });
-
-      // CTA parallax
-      var ctaBg = document.getElementById('ctaBg');
-      if (ctaBg) {
-        var ctaSection = ctaBg.closest('.shuoan-cta');
-        function updateCta() {
-          var rect = ctaSection.getBoundingClientRect();
-          var progress = Math.max(0, Math.min(1, -rect.top / (ctaSection.offsetHeight - window.innerHeight)));
-          ctaBg.style.transform = 'scale(' + (1.1 - progress * 0.1) + ')';
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', triggerHero);
+        } else {
+          triggerHero();
         }
-        var ticking = false;
-        window.addEventListener('scroll', function() {
-          if (!ticking) {
-            requestAnimationFrame(function() { updateCta(); ticking = false; });
-            ticking = true;
-          }
-        }, { passive: true });
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', triggerHero);
-      } else {
-        triggerHero();
-      }
-    })();
-  </script>
-</Layout>
+      })();
+    </script>
+  </body>
+</html>
