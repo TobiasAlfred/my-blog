@@ -2,7 +2,6 @@
    Presentations Page — ShuoAn Personal Showcase
    ============================================================ */
 
-/* [改1] 字体：去掉 Noto Serif SC + Playfair Display，加上 LXGW WenKai */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=LXGW+WenKai:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500&display=swap');
 
 html:has(.page-presentations) {
@@ -44,7 +43,6 @@ body.page-presentations {
   color: white;
 }
 
-/* [改1] 标题字体：Noto Serif SC → LXGW WenKai */
 .page-presentations h1,
 .page-presentations h2,
 .page-presentations h3,
@@ -81,7 +79,6 @@ body.page-presentations {
   -webkit-backdrop-filter: blur(12px);
 }
 
-/* [改1] 品牌字体同步 */
 .shuoan-nav__brand {
   font-family: 'LXGW WenKai', 'Noto Sans SC', sans-serif;
   font-size: 24px;
@@ -205,7 +202,6 @@ body.page-presentations {
   pointer-events: auto;
 }
 
-/* [改1] 移动端菜单字体同步 */
 .shuoan-mobile-overlay a {
   font-family: 'LXGW WenKai', 'Noto Sans SC', sans-serif;
   font-size: 28px;
@@ -382,7 +378,6 @@ body.page-presentations {
   flex: 1;
 }
 
-/* [改5-防御性] 默认可见，JS 动画叠加 */
 .shuoan-about__image {
   overflow: hidden;
   border-radius: 8px;
@@ -392,18 +387,12 @@ body.page-presentations {
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.shuoan-about__image.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .shuoan-about__image img {
   width: 100%;
   height: auto;
   display: block;
 }
 
-/* [改5-防御性] 默认可见 */
 .shuoan-tags {
   display: flex;
   flex-wrap: wrap;
@@ -411,11 +400,6 @@ body.page-presentations {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
-}
-
-.shuoan-tags.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .shuoan-tag {
@@ -562,10 +546,20 @@ body.page-presentations {
   }
 }
 
+/* ========== TRANSITION: Capabilities → Gallery ========== */
+.shuoan-transition {
+  height: 200px;
+  background: linear-gradient(
+    to bottom,
+    var(--shuoan-bg) 0%,
+    #FAF6F0 100%
+  );
+}
+
 /* ========== GALLERY ========== */
 .shuoan-gallery {
   padding: 120px 48px;
-  background-color: var(--shuoan-bg-dark);
+  background-color: #FAF6F0;
 }
 
 .shuoan-gallery__inner {
@@ -578,13 +572,16 @@ body.page-presentations {
   margin-bottom: 64px;
 }
 
+.shuoan-gallery .shuoan-section-title {
+  color: var(--shuoan-text);
+}
+
 .shuoan-gallery__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
-/* [改5-防御性] 默认可见 */
 .shuoan-gallery__item {
   cursor: pointer;
   opacity: 1;
@@ -592,28 +589,21 @@ body.page-presentations {
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.shuoan-gallery__item.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .shuoan-gallery__thumb {
   overflow: hidden;
   border-radius: 8px;
 }
 
-/* [改3] 画廊颜色方案：grayscale(100%) → sepia(40%) saturate(50%) brightness(0.75) */
 .shuoan-gallery__thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: sepia(40%) saturate(50%) brightness(0.75);
+  filter: sepia(15%) saturate(75%) brightness(1.0);
   transition: filter 0.6s ease, transform 0.6s ease;
 }
 
-/* [改3] hover 恢复全彩 */
 .shuoan-gallery__item:hover .shuoan-gallery__thumb img {
-  filter: none;
+  filter: sepia(0%) saturate(100%) brightness(1.05);
   transform: scale(1.03);
 }
 
@@ -626,14 +616,14 @@ body.page-presentations {
 
 .shuoan-gallery__name {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--shuoan-text);
 }
 
 .shuoan-gallery__date {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--shuoan-text-secondary);
 }
 
 @media (max-width: 636px) {
@@ -644,11 +634,6 @@ body.page-presentations {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-}
-
-/* Dark section title override */
-.shuoan-gallery .shuoan-section-title {
-  color: rgba(255, 255, 255, 0.9);
 }
 
 /* ========== CTA ========== */
@@ -679,7 +664,12 @@ body.page-presentations {
 .shuoan-cta__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.55) 40%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
 }
 
 .shuoan-cta__content {
@@ -689,12 +679,15 @@ body.page-presentations {
   padding: 0 20px;
 }
 
-/* [改4] CTA 标题加 text-shadow 防淹没 */
 .shuoan-cta__title {
   font-size: 52px;
-  color: rgba(255, 255, 255, 0.95);
+  color: #FFFFFF;
   margin-bottom: 24px;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.6),
+    0 4px 16px rgba(0, 0, 0, 0.5),
+    0 8px 40px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.02em;
 }
 
 .shuoan-cta__title .line {
@@ -702,24 +695,19 @@ body.page-presentations {
   overflow: hidden;
 }
 
-/* [改4+改5] 默认 translateY(0) 防 JS 崩溃时不显示 */
 .shuoan-cta__title .line span {
   display: block;
   transform: translateY(0);
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.shuoan-cta__title.visible .line span {
-  transform: translateY(0);
-}
-
 .shuoan-cta__email {
   position: relative;
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   transition: color 0.3s ease;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .shuoan-cta__email::after {
