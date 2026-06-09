@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
+/* ============================================================
+   Presentations Page — ShuoAn Personal Showcase
+   ============================================================ */
+
+/* [改1] 字体：去掉 Noto Serif SC + Playfair Display，加上 LXGW WenKai */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=LXGW+WenKai:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500&display=swap');
 
 html:has(.page-presentations) {
   height: auto !important;
@@ -39,11 +44,12 @@ body.page-presentations {
   color: white;
 }
 
+/* [改1] 标题字体：Noto Serif SC → LXGW WenKai */
 .page-presentations h1,
 .page-presentations h2,
 .page-presentations h3,
 .page-presentations h4 {
-  font-family: 'Noto Serif SC', 'Playfair Display', serif;
+  font-family: 'LXGW WenKai', 'Noto Sans SC', sans-serif;
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.2;
@@ -75,8 +81,9 @@ body.page-presentations {
   -webkit-backdrop-filter: blur(12px);
 }
 
+/* [改1] 品牌字体同步 */
 .shuoan-nav__brand {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'LXGW WenKai', 'Noto Sans SC', sans-serif;
   font-size: 24px;
   color: var(--shuoan-text);
   text-decoration: none;
@@ -140,7 +147,8 @@ body.page-presentations {
 .shuoan-nav__links a:hover::after {
   opacity: 1;
 }
-/* 新增：汉堡菜单按钮 */
+
+/* Mobile hamburger */
 .shuoan-nav__menu {
   display: none;
   flex-direction: column;
@@ -164,18 +172,19 @@ body.page-presentations {
   transform-origin: center;
 }
 
-/* 汉堡菜单展开后的 X 动画 */
 .shuoan-nav__menu.active span:nth-child(1) {
   transform: translateY(6.5px) rotate(45deg);
 }
+
 .shuoan-nav__menu.active span:nth-child(2) {
   opacity: 0;
 }
+
 .shuoan-nav__menu.active span:nth-child(3) {
   transform: translateY(-6.5px) rotate(-45deg);
 }
 
-/* 新增：移动端全屏导航遮罩 */
+/* Mobile overlay */
 .shuoan-mobile-overlay {
   position: fixed;
   inset: 0;
@@ -196,8 +205,9 @@ body.page-presentations {
   pointer-events: auto;
 }
 
+/* [改1] 移动端菜单字体同步 */
 .shuoan-mobile-overlay a {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'LXGW WenKai', 'Noto Sans SC', sans-serif;
   font-size: 28px;
   color: var(--shuoan-text);
   text-decoration: none;
@@ -214,10 +224,10 @@ body.page-presentations {
     height: 64px;
   }
   .shuoan-nav__links {
-    display: none;          /* 隐藏桌面导航 */
+    display: none;
   }
   .shuoan-nav__menu {
-    display: flex;          /* 显示汉堡菜单 */
+    display: flex;
   }
 }
 
@@ -372,6 +382,7 @@ body.page-presentations {
   flex: 1;
 }
 
+/* [改5-防御性] 默认可见，JS 动画叠加 */
 .shuoan-about__image {
   overflow: hidden;
   border-radius: 8px;
@@ -381,12 +392,18 @@ body.page-presentations {
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
+.shuoan-about__image.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .shuoan-about__image img {
   width: 100%;
   height: auto;
   display: block;
 }
 
+/* [改5-防御性] 默认可见 */
 .shuoan-tags {
   display: flex;
   flex-wrap: wrap;
@@ -394,6 +411,11 @@ body.page-presentations {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+}
+
+.shuoan-tags.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .shuoan-tag {
@@ -455,8 +477,6 @@ body.page-presentations {
 
 .shuoan-about__text p {
   margin-bottom: 16px;
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Form */
@@ -542,128 +562,6 @@ body.page-presentations {
   }
 }
 
-/* ========== SKILL CARDS (Parallax) ========== */
-.shuoan-skill {
-  position: relative;
-  width: 100%;
-  height: 300vh;
-}
-
-.shuoan-skill__sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-}
-
-.shuoan-skill__bg {
-  position: absolute;
-  width: 100%;
-  height: 130%;
-  top: -15%;
-}
-
-.shuoan-skill__bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.shuoan-skill__overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-}
-
-.shuoan-skill__content {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 48px;
-}
-
-.shuoan-glass-card {
-  backdrop-filter: blur(16px);                        /* 12px → 16px */
-  -webkit-backdrop-filter: blur(16px);                /* 12px → 16px */
-  background: rgba(255, 255, 255, 0.82);              /* 0.65 → 0.82 */
-  border: 1px solid rgba(255, 255, 255, 0.4);         /* 0.3 → 0.4 */
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  border-radius: 12px;
-  padding: 40px 48px;
-  max-width: 500px;
-  width: 100%;
-  opacity: 1;
-  transform: scale(0.98) translateY(60px);
-}
-
-.shuoan-glass-card--left {
-  margin-right: auto;
-  margin-left: 48px;
-}
-
-.shuoan-glass-card--right {
-  margin-left: auto;
-  margin-right: 48px;
-}
-
-.shuoan-glass-card__meta {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.shuoan-glass-card__num {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  color: var(--shuoan-text-secondary);
-}
-
-.shuoan-glass-card__label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--shuoan-text-secondary);
-}
-
-.shuoan-glass-card__title {
-  font-size: 28px;
-  color: var(--shuoan-text);
-  margin-bottom: 16px;
-  font-weight: 500;    /* 新增：标题加粗 */
-}
-
-.shuoan-glass-card__desc {
-  font-size: 14px;
-  line-height: 1.85;
-  color: var(--shuoan-text-secondary);
-}
-
-@media (max-width: 768px) {
-  .shuoan-glass-card {
-    margin: 0 !important;
-    padding: 28px 24px;
-  }
-  .shuoan-skill__content {
-    padding: 0 20px;
-  }
-}
-
-/* 新增：从暖白到深黑的渐变过渡带 */
-.shuoan-transition {
-  height: 200px;
-  background: linear-gradient(
-    to bottom,
-    var(--shuoan-bg) 0%,        /* #F4F1EC 暖白 */
-    var(--shuoan-bg-dark) 100%  /* #1E1E1E 深黑 */
-  );
-}
-
 /* ========== GALLERY ========== */
 .shuoan-gallery {
   padding: 120px 48px;
@@ -678,7 +576,6 @@ body.page-presentations {
 .shuoan-gallery__header {
   text-align: center;
   margin-bottom: 64px;
-  padding-top: 60px;            /* 新增：给标题区域顶部留呼吸空间 */
 }
 
 .shuoan-gallery__grid {
@@ -687,6 +584,7 @@ body.page-presentations {
   gap: 24px;
 }
 
+/* [改5-防御性] 默认可见 */
 .shuoan-gallery__item {
   cursor: pointer;
   opacity: 1;
@@ -694,16 +592,9 @@ body.page-presentations {
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.shuoan-gallery__item:nth-child(2).visible {
-  transition-delay: 0.1s;
-}
-
-.shuoan-gallery__item:nth-child(3).visible {
-  transition-delay: 0.2s;
-}
-
-.shuoan-gallery__item:nth-child(4).visible {
-  transition-delay: 0.3s;
+.shuoan-gallery__item.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .shuoan-gallery__thumb {
@@ -711,16 +602,18 @@ body.page-presentations {
   border-radius: 8px;
 }
 
+/* [改3] 画廊颜色方案：grayscale(100%) → sepia(40%) saturate(50%) brightness(0.75) */
 .shuoan-gallery__thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%);
+  filter: sepia(40%) saturate(50%) brightness(0.75);
   transition: filter 0.6s ease, transform 0.6s ease;
 }
 
+/* [改3] hover 恢复全彩 */
 .shuoan-gallery__item:hover .shuoan-gallery__thumb img {
-  filter: grayscale(0%);
+  filter: none;
   transform: scale(1.03);
 }
 
@@ -796,10 +689,12 @@ body.page-presentations {
   padding: 0 20px;
 }
 
+/* [改4] CTA 标题加 text-shadow 防淹没 */
 .shuoan-cta__title {
   font-size: 52px;
   color: rgba(255, 255, 255, 0.95);
   margin-bottom: 24px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
 }
 
 .shuoan-cta__title .line {
@@ -807,10 +702,15 @@ body.page-presentations {
   overflow: hidden;
 }
 
+/* [改4+改5] 默认 translateY(0) 防 JS 崩溃时不显示 */
 .shuoan-cta__title .line span {
   display: block;
   transform: translateY(0);
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shuoan-cta__title.visible .line span {
+  transform: translateY(0);
 }
 
 .shuoan-cta__email {
@@ -819,6 +719,7 @@ body.page-presentations {
   color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   transition: color 0.3s ease;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
 }
 
 .shuoan-cta__email::after {

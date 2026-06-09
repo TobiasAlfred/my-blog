@@ -8,7 +8,8 @@
     <meta name="description" content="Hey，我是朔安。一个 37 岁却依然保持着 20 岁好奇心的金融从业者。" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <!-- [改1] 字体：Noto Serif SC + Playfair Display 去掉，换成 LXGW WenKai -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=LXGW+WenKai:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href={import.meta.env.BASE_URL + 'styles/presentations.css'} />
   </head>
   <body class="page-presentations">
@@ -114,68 +115,7 @@
       </h2>
     </section>
 
-    <!-- Skill 01: Finance -->
-    <section class="shuoan-skill" data-skill="1">
-      <div class="shuoan-skill__sticky">
-        <div class="shuoan-skill__bg">
-          <img src={import.meta.env.BASE_URL + "images/skill-finance.jpg"} alt="Finance" />
-        </div>
-        <div class="shuoan-skill__overlay"></div>
-        <div class="shuoan-skill__content">
-          <div class="shuoan-glass-card shuoan-glass-card--right">
-            <div class="shuoan-glass-card__meta">
-              <span class="shuoan-glass-card__num">01</span>
-              <span class="shuoan-glass-card__label">FINANCE</span>
-            </div>
-            <h3 class="shuoan-glass-card__title">金融</h3>
-            <p class="shuoan-glass-card__desc">在数字洪流中寻找锚点。十年金融从业经历，让我懂得在不确定性中建立秩序。我不只关注数字的涨跌，更关注价值背后的人性与逻辑。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skill 02: Language -->
-    <section class="shuoan-skill" data-skill="2">
-      <div class="shuoan-skill__sticky">
-        <div class="shuoan-skill__bg">
-          <img src={import.meta.env.BASE_URL + "images/skill-language.jpg"} alt="Language" />
-        </div>
-        <div class="shuoan-skill__overlay"></div>
-        <div class="shuoan-skill__content">
-          <div class="shuoan-glass-card shuoan-glass-card--left">
-            <div class="shuoan-glass-card__meta">
-              <span class="shuoan-glass-card__num">02</span>
-              <span class="shuoan-glass-card__label">LANGUAGE</span>
-            </div>
-            <h3 class="shuoan-glass-card__title">语言</h3>
-            <p class="shuoan-glass-card__desc">语言是通往另一种思维的钥匙。流利驾驭德语与英语，让我能直接阅读海森堡的物理原稿，或是卡夫卡未经翻译的梦境。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skill 03: Technology -->
-    <section class="shuoan-skill" data-skill="3">
-      <div class="shuoan-skill__sticky">
-        <div class="shuoan-skill__bg">
-          <img src={import.meta.env.BASE_URL + "images/skill-tech.jpg"} alt="Technology" />
-        </div>
-        <div class="shuoan-skill__overlay"></div>
-        <div class="shuoan-skill__content">
-          <div class="shuoan-glass-card shuoan-glass-card--right">
-            <div class="shuoan-glass-card__meta">
-              <span class="shuoan-glass-card__num">03</span>
-              <span class="shuoan-glass-card__label">TECHNOLOGY</span>
-            </div>
-            <h3 class="shuoan-glass-card__title">技术</h3>
-            <p class="shuoan-glass-card__desc">从网络协议到人工智能。我相信技术应当是温暖且普惠的。我擅长将复杂的系统拆解，并用优雅的代码重构生活的便利。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Transition: skills to gallery -->
-    <div class="shuoan-transition"></div>
+    <!-- [改2] 删除 Skill 01/02/03 三个 section + transition div，直接接 Gallery -->
 
     <!-- Gallery Section -->
     <section class="shuoan-gallery" id="gallery">
@@ -234,8 +174,9 @@
       </div>
       <div class="shuoan-cta__overlay"></div>
       <div class="shuoan-cta__content">
+        <!-- [改4] 中文 → 英文 Stay hungry, Stay foolish -->
         <h2 class="shuoan-cta__title shuoan-section-title" id="ctaTitle">
-          <span class="line"><span>保持好奇，保持饥饿。</span></span>
+          <span class="line"><span>Stay hungry, Stay foolish</span></span>
         </h2>
         <a href="mailto:hello@shuoan.me" class="shuoan-cta__email">hello@shuoan.me</a>
       </div>
@@ -258,14 +199,19 @@
       (function() {
         'use strict';
 
+        // Nav scroll effect
         var nav = document.getElementById('shuoanNav');
         function onScroll() {
-          if (window.scrollY > 100) { nav.classList.add('scrolled'); }
-          else { nav.classList.remove('scrolled'); }
+          if (window.scrollY > 100) {
+            nav.classList.add('scrolled');
+          } else {
+            nav.classList.remove('scrolled');
+          }
         }
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
 
+        // Mobile menu toggle
         var menuBtn = document.getElementById('mobileMenu');
         var mobileOverlay = document.getElementById('mobileOverlay');
         if (menuBtn && mobileOverlay) {
@@ -283,26 +229,40 @@
           });
         }
 
+        // Back to top
         document.getElementById('backToTop').addEventListener('click', function() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
+        // Hero entrance
         function triggerHero() {
-          setTimeout(function() { document.getElementById('heroTitle').classList.add('visible'); }, 300);
+          setTimeout(function() {
+            document.getElementById('heroTitle').classList.add('visible');
+          }, 300);
           var heroBg = document.querySelector('#heroBg img');
           if (heroBg) {
             heroBg.style.transform = 'scale(1.08)';
             heroBg.style.transition = 'transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
-            requestAnimationFrame(function() { requestAnimationFrame(function() { heroBg.style.transform = 'scale(1)'; }); });
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() {
+                heroBg.style.transform = 'scale(1)';
+              });
+            });
           }
         }
 
+        // Intersection Observer helper
         function observe(selector, callback, options) {
           options = options || { threshold: 0.15 };
           var elements = document.querySelectorAll(selector);
           if (!elements.length) return;
           var observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) { if (entry.isIntersecting) { callback(entry.target); observer.unobserve(entry.target); } });
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                callback(entry.target);
+                observer.unobserve(entry.target);
+              }
+            });
           }, options);
           elements.forEach(function(el) { observer.observe(el); });
         }
@@ -312,25 +272,7 @@
         observe('.shuoan-tags', function(el) { el.classList.add('visible'); });
         observe('.shuoan-gallery__item', function(el) { el.classList.add('visible'); });
 
-        document.querySelectorAll('.shuoan-skill').forEach(function(section) {
-          var bg = section.querySelector('.shuoan-skill__bg');
-          var card = section.querySelector('.shuoan-glass-card');
-          if (!bg || !card) return;
-          function update() {
-            var rect = section.getBoundingClientRect();
-            var sectionH = section.offsetHeight;
-            var progress = Math.max(0, Math.min(1, -rect.top / (sectionH - window.innerHeight)));
-            bg.style.transform = 'translateY(' + (-15 + progress * 30) + '%)';
-            card.style.opacity = String(0.2 + progress * 0.8);
-            card.style.transform = 'scale(' + (0.98 + progress * 0.02) + ') translateY(' + (60 - progress * 120) + 'px)';
-          }
-          var ticking = false;
-          window.addEventListener('scroll', function() {
-            if (!ticking) { requestAnimationFrame(function() { update(); ticking = false; }); ticking = true; }
-          }, { passive: true });
-          update();
-        });
-
+        // CTA parallax
         var ctaBg = document.getElementById('ctaBg');
         if (ctaBg) {
           var ctaSection = ctaBg.closest('.shuoan-cta');
@@ -341,28 +283,30 @@
           }
           var ticking = false;
           window.addEventListener('scroll', function() {
-            if (!ticking) { requestAnimationFrame(function() { updateCta(); ticking = false; }); ticking = true; }
+            if (!ticking) {
+              requestAnimationFrame(function() { updateCta(); ticking = false; });
+              ticking = true;
+            }
           }, { passive: true });
         }
 
-        var aboutTexts = document.querySelectorAll('.shuoan-about__text p');
-        aboutTexts.forEach(function(p, i) {
-          p.style.opacity = '0'; p.style.transform = 'translateY(20px)';
-          p.style.transition = 'opacity 0.6s ease ' + (i * 0.15) + 's, transform 0.6s ease ' + (i * 0.15) + 's';
-          observe('.shuoan-about__text', function() {
-            aboutTexts.forEach(function(el) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
-          });
-        });
-
+        // Hero content entrance
         var heroContent = document.querySelector('.shuoan-hero__content');
         if (heroContent) {
-          heroContent.style.opacity = '0'; heroContent.style.transform = 'translateY(40px)';
+          heroContent.style.opacity = '0';
+          heroContent.style.transform = 'translateY(40px)';
           heroContent.style.transition = 'opacity 1s ease 0.4s, transform 1s ease 0.4s';
-          setTimeout(function() { heroContent.style.opacity = '1'; heroContent.style.transform = 'translateY(0)'; }, 100);
+          setTimeout(function() {
+            heroContent.style.opacity = '1';
+            heroContent.style.transform = 'translateY(0)';
+          }, 100);
         }
 
-        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', triggerHero); }
-        else { triggerHero(); }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', triggerHero);
+        } else {
+          triggerHero();
+        }
       })();
     </script>
   </body>
