@@ -82,6 +82,7 @@ body.page-presentations {
 .shuoan-nav__brand {
   font-family: 'LXGW WenKai', 'Noto Sans SC', sans-serif;
   font-size: 24px;
+  font-weight: 500;
   color: var(--shuoan-text);
   text-decoration: none;
   letter-spacing: -0.02em;
@@ -280,8 +281,9 @@ body.page-presentations {
 .shuoan-hero__title {
   font-size: 64px;
   line-height: 1.1;
-  color: var(--shuoan-text);
+  color: #3a3630;
   margin-bottom: 32px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3), 0 0 60px rgba(0, 0, 0, 0.15);
 }
 
 .shuoan-hero__title .line {
@@ -381,7 +383,7 @@ body.page-presentations {
 .shuoan-about__image {
   overflow: hidden;
   border-radius: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -391,12 +393,13 @@ body.page-presentations {
   width: 100%;
   height: auto;
   display: block;
+  object-position: center 40%;
 }
 
 .shuoan-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
@@ -405,20 +408,27 @@ body.page-presentations {
 .shuoan-tag {
   display: inline-block;
   padding: 6px 16px;
-  background: white;
-  border: 1px solid var(--shuoan-border);
   border-radius: 9999px;
   font-size: 12px;
   font-family: 'Noto Sans SC', sans-serif;
-  color: var(--shuoan-text);
   letter-spacing: 0.02em;
-  transition: border-color 0.3s ease, color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
 }
 
 .shuoan-tag:hover {
-  border-color: var(--shuoan-accent);
-  color: var(--shuoan-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
+
+.shuoan-tag:nth-child(1) { background: #F5E6D3; color: #8B6914; }
+.shuoan-tag:nth-child(2) { background: #E8DED0; color: #7A6B5D; }
+.shuoan-tag:nth-child(3) { background: #D4E5ED; color: #4A6B7A; }
+.shuoan-tag:nth-child(4) { background: #E5DDD4; color: #6B5B4E; }
+.shuoan-tag:nth-child(5) { background: #DDE8D8; color: #5A6B4E; }
+.shuoan-tag:nth-child(6) { background: #E2DAE5; color: #6B5B7A; }
+.shuoan-tag:nth-child(7) { background: #F0E3D8; color: #7A5A3A; }
+.shuoan-tag:nth-child(8) { background: #D8E2DC; color: #4A6B5A; }
 
 .shuoan-section-caption {
   font-family: 'IBM Plex Mono', monospace;
@@ -452,6 +462,10 @@ body.page-presentations {
 
 .shuoan-section-title .line:nth-child(2) span {
   transition-delay: 0.08s;
+}
+
+.shuoan-about__right {
+  padding-top: 16px;
 }
 
 .shuoan-about__text {
@@ -535,18 +549,171 @@ body.page-presentations {
 
 /* ========== SKILLS HEADER ========== */
 .shuoan-skills-header {
-  padding: 120px 48px;
+  padding: 120px 48px 60px;
   text-align: center;
   background-color: var(--shuoan-bg);
 }
 
 @media (max-width: 636px) {
   .shuoan-skills-header {
-    padding: 80px 20px;
+    padding: 80px 20px 40px;
   }
 }
 
-/* ========== TRANSITION: Capabilities → Gallery ========== */
+/* ========== TIMELINE ========== */
+.shuoan-timeline {
+  padding: 0 48px 120px;
+  background-color: var(--shuoan-bg);
+}
+
+.shuoan-timeline__inner {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.shuoan-timeline__inner::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--shuoan-border) 10%,
+    var(--shuoan-border) 90%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+}
+
+.shuoan-timeline__item {
+  display: flex;
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.shuoan-timeline__item:last-child {
+  margin-bottom: 0;
+}
+
+.shuoan-timeline__item:nth-child(odd) {
+  flex-direction: row;
+}
+
+.shuoan-timeline__item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.shuoan-timeline__content {
+  width: 45%;
+  padding: 20px 28px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+  position: relative;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.shuoan-timeline__content:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.shuoan-timeline__content::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  width: 12px;
+  height: 12px;
+  background: white;
+  transform: rotate(45deg);
+}
+
+.shuoan-timeline__item:nth-child(odd) .shuoan-timeline__content::before {
+  right: -6px;
+}
+
+.shuoan-timeline__item:nth-child(even) .shuoan-timeline__content::before {
+  left: -6px;
+}
+
+.shuoan-timeline__year {
+  width: 45%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--shuoan-text-secondary);
+}
+
+.shuoan-timeline__dot {
+  position: absolute;
+  left: 50%;
+  top: 24px;
+  width: 10px;
+  height: 10px;
+  background: var(--shuoan-accent);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 4px var(--shuoan-bg);
+  z-index: 2;
+}
+
+.shuoan-timeline__title {
+  font-family: 'LXGW WenKai', 'Noto Sans SC', sans-serif;
+  font-size: 18px;
+  color: var(--shuoan-text);
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+
+.shuoan-timeline__desc {
+  font-size: 14px;
+  color: var(--shuoan-text-secondary);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .shuoan-timeline {
+    padding: 0 20px 80px;
+  }
+  .shuoan-timeline__inner::before {
+    left: 20px;
+  }
+  .shuoan-timeline__item,
+  .shuoan-timeline__item:nth-child(odd),
+  .shuoan-timeline__item:nth-child(even) {
+    flex-direction: column;
+  }
+  .shuoan-timeline__content,
+  .shuoan-timeline__year {
+    width: 100%;
+    padding-left: 48px;
+  }
+  .shuoan-timeline__content {
+    margin-bottom: 8px;
+  }
+  .shuoan-timeline__content::before {
+    display: none;
+  }
+  .shuoan-timeline__year {
+    justify-content: flex-start;
+    padding-top: 0;
+    padding-bottom: 16px;
+  }
+  .shuoan-timeline__dot {
+    left: 20px;
+    transform: translateX(-50%);
+  }
+}
+
+/* ========== TRANSITION ========== */
 .shuoan-transition {
   height: 200px;
   background: linear-gradient(
@@ -579,7 +746,7 @@ body.page-presentations {
 .shuoan-gallery__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 .shuoan-gallery__item {
@@ -591,7 +758,22 @@ body.page-presentations {
 
 .shuoan-gallery__thumb {
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 14px;
+  position: relative;
+}
+
+.shuoan-gallery__thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.03);
+  transition: background 0.4s ease;
+  pointer-events: none;
+  border-radius: 14px;
+}
+
+.shuoan-gallery__item:hover .shuoan-gallery__thumb::after {
+  background: rgba(0, 0, 0, 0);
 }
 
 .shuoan-gallery__thumb img {
@@ -599,12 +781,12 @@ body.page-presentations {
   height: 100%;
   object-fit: cover;
   filter: sepia(15%) saturate(75%) brightness(1.0);
-  transition: filter 0.6s ease, transform 0.6s ease;
+  transition: filter 0.6s ease, transform 0.4s ease;
 }
 
 .shuoan-gallery__item:hover .shuoan-gallery__thumb img {
   filter: sepia(0%) saturate(100%) brightness(1.05);
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 .shuoan-gallery__info {
@@ -672,25 +854,24 @@ body.page-presentations {
   );
 }
 
-/* 半透明深色背景卡片，物理隔开文字和背景图 */
 .shuoan-cta__content {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: 48px 64px;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+  border: none;
 }
 
 .shuoan-cta__title {
-  font-size: 52px;
+  font-size: 56px;
   color: #FFFFFF;
-  margin-bottom: 24px;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-  letter-spacing: 0.02em;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6), 0 4px 40px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.01em;
 }
 
 .shuoan-cta__title .line {
@@ -706,11 +887,12 @@ body.page-presentations {
 
 .shuoan-cta__email {
   position: relative;
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
   transition: color 0.3s ease;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6), 0 2px 20px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.02em;
 }
 
 .shuoan-cta__email::after {
@@ -734,10 +916,13 @@ body.page-presentations {
 
 @media (max-width: 636px) {
   .shuoan-cta__content {
-    padding: 32px 24px;
+    padding: 0 20px;
   }
   .shuoan-cta__title {
     font-size: 32px;
+  }
+  .shuoan-cta__email {
+    font-size: 16px;
   }
 }
 
