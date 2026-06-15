@@ -96,13 +96,19 @@ body.page-presentations {
   border-color: var(--shuoan-accent);
 }
 
+/* [修改2] 导航链接区域：毛玻璃背景菜单 */
 .shuoan-nav__links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 4px;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(44, 44, 44, 0.08);
 }
 
 .shuoan-nav__links li {
@@ -114,18 +120,24 @@ body.page-presentations {
   position: relative;
   font-family: 'Noto Sans SC', sans-serif;
   font-size: 14px;
+  font-weight: 500;
   color: var(--shuoan-text);
   text-decoration: none;
-  transition: color 0.3s ease;
-  padding: 0;
-  border: none;
-  font-weight: 400;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: block;
+}
+
+.shuoan-nav__links a:hover {
+  color: var(--shuoan-accent);
+  background: rgba(192, 108, 77, 0.08);
 }
 
 .shuoan-nav__links a::after {
   content: '';
   position: absolute;
-  bottom: -4px;
+  bottom: 4px;
   left: 50%;
   transform: translateX(-50%);
   width: 4px;
@@ -136,17 +148,10 @@ body.page-presentations {
   transition: opacity 0.3s ease;
 }
 
-.shuoan-nav__links a:hover {
-  color: var(--shuoan-accent);
-  background: none;
-  padding-left: 0;
-}
-
 .shuoan-nav__links a:hover::after {
   opacity: 1;
 }
 
-/* Mobile hamburger */
 .shuoan-nav__menu {
   display: none;
   flex-direction: column;
@@ -182,7 +187,6 @@ body.page-presentations {
   transform: translateY(-6.5px) rotate(-45deg);
 }
 
-/* Mobile overlay */
 .shuoan-mobile-overlay {
   position: fixed;
   inset: 0;
@@ -278,12 +282,12 @@ body.page-presentations {
   margin-bottom: 24px;
 }
 
+/* [修改1] 删除底部矩形阴影 */
 .shuoan-hero__title {
   font-size: 64px;
   line-height: 1.1;
   color: #3a3630;
   margin-bottom: 32px;
-  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3), 0 0 60px rgba(0, 0, 0, 0.15);
 }
 
 .shuoan-hero__title .line {
@@ -477,57 +481,6 @@ body.page-presentations {
   margin-bottom: 16px;
 }
 
-/* Form */
-.shuoan-form {
-  margin-top: 48px;
-  padding-top: 32px;
-  border-top: 1px solid var(--shuoan-border);
-}
-
-.shuoan-form__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.shuoan-form__input {
-  width: 100%;
-  padding: 12px 16px;
-  background: transparent;
-  border: 1px solid var(--shuoan-border);
-  border-radius: 6px;
-  font-family: 'Noto Sans SC', sans-serif;
-  font-size: 14px;
-  color: var(--shuoan-text);
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.shuoan-form__input::placeholder {
-  color: var(--shuoan-text-secondary);
-}
-
-.shuoan-form__input:focus {
-  border-color: var(--shuoan-accent);
-}
-
-.shuoan-form__btn {
-  padding: 12px 32px;
-  background: var(--shuoan-text);
-  color: var(--shuoan-bg);
-  border: none;
-  border-radius: 6px;
-  font-family: 'Noto Sans SC', sans-serif;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.4s ease;
-}
-
-.shuoan-form__btn:hover {
-  background: var(--shuoan-accent);
-}
-
 @media (max-width: 768px) {
   .shuoan-about {
     padding: 80px 20px;
@@ -541,9 +494,6 @@ body.page-presentations {
   }
   .shuoan-section-title {
     font-size: 32px;
-  }
-  .shuoan-form__grid {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -714,8 +664,9 @@ body.page-presentations {
 }
 
 /* ========== TRANSITION ========== */
+/* [修改3] 缩短过渡区域高度 */
 .shuoan-transition {
-  height: 200px;
+  height: 60px;
   background: linear-gradient(
     to bottom,
     var(--shuoan-bg) 0%,
@@ -815,114 +766,6 @@ body.page-presentations {
   .shuoan-gallery__grid {
     grid-template-columns: 1fr;
     gap: 20px;
-  }
-}
-
-/* ========== CTA ========== */
-.shuoan-cta {
-  position: relative;
-  width: 100%;
-  height: 80vh;
-  min-height: 500px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.shuoan-cta__bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.shuoan-cta__bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.shuoan-cta__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0.55) 40%,
-    rgba(0, 0, 0, 0.6) 100%
-  );
-}
-
-.shuoan-cta__content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 0;
-  background: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border-radius: 0;
-  border: none;
-}
-
-.shuoan-cta__title {
-  font-size: 56px;
-  color: #FFFFFF;
-  margin-bottom: 20px;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6), 0 4px 40px rgba(0, 0, 0, 0.4);
-  letter-spacing: 0.01em;
-}
-
-.shuoan-cta__title .line {
-  display: block;
-  overflow: hidden;
-}
-
-.shuoan-cta__title .line span {
-  display: block;
-  transform: translateY(0);
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.shuoan-cta__email {
-  position: relative;
-  font-size: 20px;
-  color: rgba(255, 255, 255, 0.95);
-  text-decoration: none;
-  transition: color 0.3s ease;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6), 0 2px 20px rgba(0, 0, 0, 0.4);
-  letter-spacing: 0.02em;
-}
-
-.shuoan-cta__email::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: white;
-  transition: width 0.5s ease;
-}
-
-.shuoan-cta__email:hover {
-  color: white;
-}
-
-.shuoan-cta__email:hover::after {
-  width: 100%;
-}
-
-@media (max-width: 636px) {
-  .shuoan-cta__content {
-    padding: 0 20px;
-  }
-  .shuoan-cta__title {
-    font-size: 32px;
-  }
-  .shuoan-cta__email {
-    font-size: 16px;
   }
 }
 
