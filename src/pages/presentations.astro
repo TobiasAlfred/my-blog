@@ -112,17 +112,17 @@
         <div class="shuoan-timeline__item">
           <div class="shuoan-timeline__content">
             <div class="shuoan-timeline__title">金融之路的起点</div>
-            <div class="shuoan-timeline__desc">硕士毕业于财经院校，踏入金融行业。从基层岗位做起，在无数次报表分析和人性实验中，建立起对宏观经济的直觉。</div>
+            <div class="shuoan-timeline__desc">硕士毕业于财经院校，踏入金融行业。从基层岗位做起，在无数次报表分析和市场调研中，建立起对宏观经济的直觉。</div>
           </div>
-          <div class="shuoan-timeline__year">2013 — 2015</div>
+          <div class="shuoan-timeline__year">2012 — 2015</div>
           <div class="shuoan-timeline__dot"></div>
         </div>
         <div class="shuoan-timeline__item">
           <div class="shuoan-timeline__content">
             <div class="shuoan-timeline__title">理性与感性的交汇</div>
-            <div class="shuoan-timeline__desc">系统学习计算机，从零搭建企业级网络。同时精进德语，梦回奥格斯堡的梦境。技术让我更理性，语言让我更感性。</div>
+            <div class="shuoan-timeline__desc">系统学习计算机网络，从零搭建服务器。同时精进德语，能直接阅读海森堡的原稿和卡夫卡的梦境。技术让我更理性，语言让我更感性。</div>
           </div>
-          <div class="shuoan-timeline__year">2015 — 2022</div>
+          <div class="shuoan-timeline__year">2015 — 2018</div>
           <div class="shuoan-timeline__dot"></div>
         </div>
         <div class="shuoan-timeline__item">
@@ -130,7 +130,7 @@
             <div class="shuoan-timeline__title">深度探索 AI 领域</div>
             <div class="shuoan-timeline__desc">开始深入研究人工智能，从机器学习到深度学习。相信技术能让创意民主化，每个人都能成为创作者。在 996 的缝隙中挤出时间学习。</div>
           </div>
-          <div class="shuoan-timeline__year">2022 — 2024</div>
+          <div class="shuoan-timeline__year">2018 — 2022</div>
           <div class="shuoan-timeline__dot"></div>
         </div>
         <div class="shuoan-timeline__item">
@@ -138,7 +138,7 @@
             <div class="shuoan-timeline__title">旷野与轨道之间</div>
             <div class="shuoan-timeline__desc">36 岁，在稳妥与冒险之间寻找平衡。左手金融模型，右手 AI 工具。开始记录自己的思考，搭建这个小小的数字花园。依然相信：日拱一卒，功不唐捐。</div>
           </div>
-          <div class="shuoan-timeline__year">2025 — 现在</div>
+          <div class="shuoan-timeline__year">2022 — 现在</div>
           <div class="shuoan-timeline__dot"></div>
         </div>
       </div>
@@ -224,6 +224,7 @@
       (function() {
         'use strict';
 
+        // Nav scroll effect
         var nav = document.getElementById('shuoanNav');
         function onScroll() {
           if (window.scrollY > 100) {
@@ -235,6 +236,7 @@
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll();
 
+        // Mobile menu toggle
         var menuBtn = document.getElementById('mobileMenu');
         var mobileOverlay = document.getElementById('mobileOverlay');
         if (menuBtn && mobileOverlay) {
@@ -252,14 +254,14 @@
           });
         }
 
+        // Back to top
         document.getElementById('backToTop').addEventListener('click', function() {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
+        // Hero entrance
         function triggerHero() {
-          setTimeout(function() {
-            document.getElementById('heroTitle').classList.add('visible');
-          }, 300);
+          document.getElementById('heroTitle').classList.add('visible');
           var heroBg = document.querySelector('#heroBg img');
           if (heroBg) {
             heroBg.style.transform = 'scale(1.08)';
@@ -272,6 +274,7 @@
           }
         }
 
+        // Intersection Observer helper
         function observe(selector, callback, options) {
           options = options || { threshold: 0.15 };
           var elements = document.querySelectorAll(selector);
@@ -287,15 +290,16 @@
           elements.forEach(function(el) { observer.observe(el); });
         }
 
+        /* [修复] 标题默认已可见，JS仅作为滚动触发动画的增强效果 */
         observe('.shuoan-section-title', function(el) { el.classList.add('visible'); });
         observe('.shuoan-about__image', function(el) { el.classList.add('visible'); });
         observe('.shuoan-tags', function(el) { el.classList.add('visible'); });
         observe('.shuoan-gallery__item', function(el) { el.classList.add('visible'); });
         observe('.shuoan-timeline__item', function(el) {
-          el.style.opacity = '1';
-n          el.style.transform = 'translateY(0)';
+          el.classList.add('visible');
         });
 
+        // CTA parallax
         var ctaBg = document.getElementById('ctaBg');
         if (ctaBg) {
           var ctaSection = ctaBg.closest('.shuoan-cta');
@@ -313,6 +317,7 @@ n          el.style.transform = 'translateY(0)';
           }, { passive: true });
         }
 
+        // Hero content entrance
         var heroContent = document.querySelector('.shuoan-hero__content');
         if (heroContent) {
           heroContent.style.opacity = '0';
@@ -324,11 +329,16 @@ n          el.style.transform = 'translateY(0)';
           }, 100);
         }
 
+        // Timeline entrance animation
         var timelineItems = document.querySelectorAll('.shuoan-timeline__item');
         timelineItems.forEach(function(item) {
           item.style.opacity = '0';
           item.style.transform = 'translateY(20px)';
           item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        observe('.shuoan-timeline__item', function(el) {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
         });
 
         if (document.readyState === 'loading') {

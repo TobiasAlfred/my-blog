@@ -278,6 +278,7 @@ body.page-presentations {
   margin-bottom: 24px;
 }
 
+/* [修复] CSS @keyframes动画自动执行，不依赖JavaScript */
 .shuoan-hero__title {
   font-size: 64px;
   line-height: 1.1;
@@ -293,16 +294,17 @@ body.page-presentations {
 
 .shuoan-hero__title .line span {
   display: block;
-  transform: translateY(100%);
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.shuoan-hero__title.visible .line span {
   transform: translateY(0);
+  animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
 }
 
 .shuoan-hero__title .line:nth-child(2) span {
-  transition-delay: 0.08s;
+  animation-delay: 0.38s;
+}
+
+@keyframes revealUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }
 
 .shuoan-hero__desc {
@@ -450,14 +452,11 @@ body.page-presentations {
   overflow: hidden;
 }
 
+/* [修复] 默认可见，不依赖JS的visible类 */
 .shuoan-section-title .line span {
   display: block;
-  transform: translateY(100%);
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.shuoan-section-title.visible .line span {
   transform: translateY(0);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .shuoan-section-title .line:nth-child(2) span {
@@ -866,11 +865,16 @@ body.page-presentations {
   border: none;
 }
 
+/* [修复] 大幅增强阴影确保在暗色背景上可读 */
 .shuoan-cta__title {
   font-size: 56px;
   color: #FFFFFF;
   margin-bottom: 20px;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6), 0 4px 40px rgba(0, 0, 0, 0.4);
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.7),
+    0 4px 20px rgba(0, 0, 0, 0.6),
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 16px 80px rgba(0, 0, 0, 0.3);
   letter-spacing: 0.01em;
 }
 
@@ -885,13 +889,17 @@ body.page-presentations {
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* [修复] 邮箱阴影增强 */
 .shuoan-cta__email {
   position: relative;
   font-size: 20px;
   color: rgba(255, 255, 255, 0.95);
   text-decoration: none;
   transition: color 0.3s ease;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6), 0 2px 20px rgba(0, 0, 0, 0.4);
+  text-shadow:
+    0 1px 6px rgba(0, 0, 0, 0.8),
+    0 3px 15px rgba(0, 0, 0, 0.6),
+    0 6px 30px rgba(0, 0, 0, 0.4);
   letter-spacing: 0.02em;
 }
 
