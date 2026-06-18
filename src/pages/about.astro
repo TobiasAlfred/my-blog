@@ -5,6 +5,28 @@ import { SITE_DATA } from '../constants';
 import portraitImage from '../assets/portrait.png';
 
 import '../styles/about.css';
+
+// Gallery photos — add your images to public/images/gallery/ and update this array
+interface Photo {
+    src: string;
+    alt: string;
+    caption?: string;
+}
+
+const photos: Photo[] = [
+    { src: '/images/gallery/photo1.jpg', alt: 'Photo 1', caption: '' },
+    { src: '/images/gallery/photo2.jpg', alt: 'Photo 2', caption: '' },
+    { src: '/images/gallery/photo3.jpg', alt: 'Photo 3', caption: '' },
+    { src: '/images/gallery/photo4.jpg', alt: 'Photo 4', caption: '' },
+    { src: '/images/gallery/photo5.jpg', alt: 'Photo 5', caption: '' },
+    { src: '/images/gallery/photo6.jpg', alt: 'Photo 6', caption: '' },
+    { src: '/images/gallery/photo7.jpg', alt: 'Photo 7', caption: '' },
+    { src: '/images/gallery/photo8.jpg', alt: 'Photo 8', caption: '' },
+    { src: '/images/gallery/photo9.jpg', alt: 'Photo 9', caption: '' },
+    { src: '/images/gallery/photo10.jpg', alt: 'Photo 10', caption: '' },
+    { src: '/images/gallery/photo11.jpg', alt: 'Photo 11', caption: '' },
+    { src: '/images/gallery/photo12.jpg', alt: 'Photo 12', caption: '' },
+];
 ---
 
 <Layout pageTitle="About">
@@ -68,23 +90,32 @@ import '../styles/about.css';
             </style>
 
             <section>
-                <h2>CV</h2>
-                <div class="info-card">
-                    <p>
-                        For a full curriculum vitae, see my LinkedIn profile.
-                    </p>
-                    <a href={`https://linkedin.com/in/${SITE_DATA.linkedin}`}
-                       class="info-card-link"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       aria-label="Visit my LinkedIn profile">
-                        <svg viewBox="0 0 24 24" width="60" height="60" fill="currentColor">
-                            <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25a1.75 1.75 0 110-3.5 1.75 1.75 0 010 3.5zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.4 1.08 3.4 3.93z"></path>
-                        </svg>
-                        <span>LinkedIn</span>
-                    </a>
+                <h2>Gallery</h2>
+                <p class="intro-text">Some moments worth remembering.</p>
+                <div class="gallery-grid" id="gallery-grid">
+                    {photos.map((photo, index) => (
+                        <div class="gallery-item" data-index={index}>
+                            <img
+                                src={photo.src}
+                                alt={photo.alt}
+                                loading="lazy"
+                            />
+                            {photo.caption && <span class="gallery-caption">{photo.caption}</span>}
+                        </div>
+                    ))}
                 </div>
             </section>
+
+            <!-- Lightbox -->
+            <div class="gallery-lightbox" id="gallery-lightbox" aria-hidden="true">
+                <button class="gallery-lightbox-close" aria-label="Close">&times;</button>
+                <button class="gallery-lightbox-prev" aria-label="Previous">&#10094;</button>
+                <button class="gallery-lightbox-next" aria-label="Next">&#10095;</button>
+                <div class="gallery-lightbox-content">
+                    <img src="" alt="" id="gallery-lightbox-img" />
+                    <div class="gallery-lightbox-info" id="gallery-lightbox-info"></div>
+                </div>
+            </div>
 
             <section>
                 <h2>Contact</h2>
@@ -98,4 +129,98 @@ import '../styles/about.css';
             </section>
         </div>
     </div>
+
+    <script>
+        // Gallery Lightbox
+        (function() {
+            const grid = document.getElementById('gallery-grid');
+            const lightbox = document.getElementById('gallery-lightbox');
+            const lightboxImg = document.getElementById('gallery-lightbox-img');
+            const lightboxInfo = document.getElementById('gallery-lightbox-info');
+            const closeBtn = lightbox?.querySelector('.gallery-lightbox-close');
+            const prevBtn = lightbox?.querySelector('.gallery-lightbox-prev');
+            const nextBtn = lightbox?.querySelector('.gallery-lightbox-next');
+
+            if (!grid || !lightbox) return;
+
+            const items = Array.from(grid.querySelectorAll('.gallery-item'));
+            let currentIndex = 0;
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            function openLightbox(index) {
+                currentIndex = index;
+                const item = items[index];
+                if (!item) return;
+                const img = item.querySelector('img');
+                const caption = item.querySelector('.gallery-caption');
+                if (!img) return;
+
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightboxInfo.textContent = caption?.textContent || '';
+                lightboxInfo.style.display = caption?.textContent ? 'block' : 'none';
+
+                lightbox.setAttribute('aria-hidden', 'false');
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                lightbox.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+                lightboxImg.src = '';
+            }
+
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+                openLightbox(currentIndex);
+            }
+
+            function showNext() {
+                currentIndex = (currentIndex + 1) % items.length;
+                openLightbox(currentIndex);
+            }
+
+            // Click on thumbnails
+            items.forEach((item, index) => {
+                item.addEventListener('click', () => openLightbox(index));
+            });
+
+            // Close button
+            closeBtn?.addEventListener('click', closeLightbox);
+
+            // Prev / Next buttons
+            prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+            nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
+
+            // Click on backdrop to close
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showPrev();
+                if (e.key === 'ArrowRight') showNext();
+            });
+
+            // Touch swipe support
+            lightbox.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            lightbox.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) showNext();
+                    else showPrev();
+                }
+            }, { passive: true });
+        })();
+    </script>
 </Layout>
