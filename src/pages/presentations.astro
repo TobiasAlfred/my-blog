@@ -1,3 +1,18 @@
+---
+interface Song {
+  title: string;
+  artist: string;
+  file: string;
+  cover: string;
+}
+
+const songs: Song[] = [
+  { title: '歌曲一', artist: '歌手一', file: '/music/song1.mp3', cover: '/images/music/cover1.jpg' },
+  { title: '歌曲二', artist: '歌手二', file: '/music/song2.mp3', cover: '/images/music/cover2.jpg' },
+  { title: '歌曲三', artist: '歌手三', file: '/music/song3.mp3', cover: '/images/music/cover3.jpg' },
+];
+---
+
 <!doctype html>
 <html lang="zh-CN">
   <head>
@@ -19,7 +34,7 @@
         <li><a href={`${import.meta.env.BASE_URL}`}>主页</a></li>
         <li><a href="#about">关于</a></li>
         <li><a href="#skills">足迹</a></li>
-        <li><a href="#gallery">画廊</a></li>
+        <li><a href="#music">音乐</a></li>
       </ul>
       <button class="shuoan-nav__menu" id="mobileMenu" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -28,168 +43,206 @@
 
     <!-- Mobile Menu Overlay -->
     <div class="shuoan-mobile-overlay" id="mobileOverlay">
-      <a href={`${import.meta.env.BASE_URL}`}>主页</a>
-      <a href="#about">关于</a>
-      <a href="#skills">足迹</a>
-      <a href="#gallery">画廊</a>
+      <div class="shuoan-mobile-overlay__content">
+        <a href={`${import.meta.env.BASE_URL}`}>主页</a>
+        <a href="#about">关于</a>
+        <a href="#skills">足迹</a>
+        <a href="#music">音乐</a>
+      </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="shuoan-hero" id="hero">
+    <!-- Hero -->
+    <header class="shuoan-hero" id="hero">
       <div class="shuoan-hero__bg" id="heroBg">
-        <img src={import.meta.env.BASE_URL + "images/hero-bg.jpg"} alt="Hero background" />
+        <img src={import.meta.env.BASE_URL + "images/hero-bg.jpg"} alt="background" />
       </div>
-      <div class="shuoan-hero__overlay"></div>
       <div class="shuoan-hero__content">
-        <p class="shuoan-hero__caption">DIGITAL NOMAD &amp; FINANCIAL IDEALIST</p>
+        <p class="shuoan-hero__intro">Hey，我是</p>
         <h1 class="shuoan-hero__title" id="heroTitle">
-          <span class="line"><span>日拱一卒</span></span>
-          <span class="line"><span>功不唐捐</span></span>
+          <span class="line"><span>朔</span></span>
+          <span class="line"><span>安</span></span>
         </h1>
-        <p class="shuoan-hero__desc">
-          Hey，我是朔安。一个 36 岁却依然保持着 20 岁好奇心的金融从业者。我左手处理复杂的金融模型，右手搭建前沿的 AI 应用。如果你也对这个世界抱有理想，我们应该能成为很好的朋友。
-        </p>
-        <div class="shuoan-hero__avatars">
-          <div class="shuoan-avatars">
-            <div class="shuoan-avatars__item" style="background: linear-gradient(135deg, hsl(30,40%,75%), hsl(60,35%,65%))"></div>
-            <div class="shuoan-avatars__item" style="background: linear-gradient(135deg, hsl(90,40%,75%), hsl(120,35%,65%))"></div>
-            <div class="shuoan-avatars__item" style="background: linear-gradient(135deg, hsl(150,40%,75%), hsl(180,35%,65%))"></div>
-            <div class="shuoan-avatars__item" style="background: linear-gradient(135deg, hsl(210,40%,75%), hsl(240,35%,65%))"></div>
-            <div class="shuoan-avatars__item" style="background: linear-gradient(135deg, hsl(270,40%,75%), hsl(300,35%,65%))"></div>
-          </div>
-          <a href="#about" class="shuoan-hero__cta" onclick="event.preventDefault(); document.querySelector('#about').scrollIntoView({behavior:'smooth'})">
-            了解更多 <span style="display:inline-block">&rarr;</span>
-          </a>
-        </div>
+        <p class="shuoan-hero__subtitle">一个 36 岁却依然保持着 20 岁好奇心的金融从业者</p>
+        <p class="shuoan-hero__tagline">用键盘写代码，用镜头写故事</p>
       </div>
-    </section>
+    </header>
 
     <!-- About Section -->
     <section class="shuoan-about" id="about">
       <div class="shuoan-about__inner">
-        <div class="shuoan-about__left">
-          <div class="shuoan-about__image" id="aboutImg">
-            <img src={import.meta.env.BASE_URL + "images/about-cafe.jpg"} alt="朔安在咖啡馆" />
-          </div>
-          <div class="shuoan-tags" id="aboutTags">
-            <span class="shuoan-tag">做事较真</span>
-            <span class="shuoan-tag">赤诚之心</span>
-            <span class="shuoan-tag">德语通</span>
-            <span class="shuoan-tag">保持好奇</span>
-            <span class="shuoan-tag">价值投资者</span>
-            <span class="shuoan-tag">理想主义者</span>
-            <span class="shuoan-tag">金融从业者</span>
-            <span class="shuoan-tag">AI 探索者</span>
-          </div>
-        </div>
-        <div class="shuoan-about__right">
-          <p class="shuoan-section-caption">ABOUT ME</p>
+        <div class="shuoan-about__header">
+          <p class="shuoan-section-caption">ABOUT</p>
           <h2 class="shuoan-section-title" id="aboutTitle">
-            <span class="line"><span>认识朔安</span></span>
-            <span class="line"><span>不设边界，保持纯粹。</span></span>
+            <span class="line"><span>关于我</span></span>
           </h2>
+        </div>
+        <div class="shuoan-about__intro">
+          <div class="shuoan-about__image">
+            <img src={import.meta.env.BASE_URL + "images/about-cafe.jpg"} alt="about" />
+          </div>
           <div class="shuoan-about__text">
-            <p>从金融行业的严谨逻辑，到对计算机网络底层协议的痴迷；从能用德语思考哲学问题，到相信 AI 能让更多人实现创作自由。我的世界里没有"不可能"，只有"还没找到方法"。</p>
-            <p>十年前进入金融行业时，我以为自己会一直做一个传统的金融分析师。但好奇心驱使我不断向外探索——我学习了计算机网络，从零开始搭建服务器；我精进德语和英语，让自己能直接阅读海森堡的物理原稿和卡夫卡的梦境；我深入 AI 领域，相信技术能让创意民主化。</p>
-            <p>36 岁的我，依然保持着 20 岁时的那份热忱。我相信年龄只是一个数字，真正重要的是你对世界的好奇心和持续学习的动力。</p>
+            <p class="shuoan-about__lead">
+              从 keyboard 到快门，从代码到光影——<br/>
+              我在寻找那些让生活保持鲜活的瞬间。
+            </p>
+            <p>
+              职场十余年间，我一直游走于「按部就班」与「突发奇想」之间。相信人生的刻度从不只有 KPI，那些离开办公桌后拾起的片刻，往往才是定义自我的真正坐标。
+            </p>
+            <p>
+              现居成都，出没于街角咖啡馆与深夜爵士乐现场。喜欢带着相机穿行老城区，用镜头收集那些易逝的光影故事。
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Skills Section Header -->
-    <section class="shuoan-skills-header" id="skills">
-      <p class="shuoan-section-caption">CAPABILITIES</p>
-      <h2 class="shuoan-section-title" id="skillsTitle">
-        <span class="line"><span>不只是</span></span>
-        <span class="line"><span>你以为的样子</span></span>
-      </h2>
-    </section>
-
-    <!-- 人生时间线 -->
-    <section class="shuoan-timeline">
-      <div class="shuoan-timeline__inner">
-        <div class="shuoan-timeline__item">
-          <div class="shuoan-timeline__content">
-            <div class="shuoan-timeline__title">金融之路的起点</div>
-            <div class="shuoan-timeline__desc">硕士毕业于财经院校，踏入金融行业。从基层岗位做起，在无数次报表分析和人性实验中，建立起对宏观经济的直觉。</div>
-          </div>
-          <div class="shuoan-timeline__year">2013 — 2015</div>
-          <div class="shuoan-timeline__dot"></div>
-        </div>
-        <div class="shuoan-timeline__item">
-          <div class="shuoan-timeline__content">
-            <div class="shuoan-timeline__title">理性与感性的交汇</div>
-            <div class="shuoan-timeline__desc">系统学习计算机，从零搭建企业级网络。同时精进德语，梦回奥格斯堡的梦境。技术让我更理性，语言让我更感性。</div>
-          </div>
-          <div class="shuoan-timeline__year">2015 — 2022</div>
-          <div class="shuoan-timeline__dot"></div>
-        </div>
-        <div class="shuoan-timeline__item">
-          <div class="shuoan-timeline__content">
-            <div class="shuoan-timeline__title">深度探索 AI 领域</div>
-            <div class="shuoan-timeline__desc">开始深入研究人工智能，从机器学习到深度学习。相信技术能让创意民主化，每个人都能成为创作者。在 996 的缝隙中挤出时间学习。</div>
-          </div>
-          <div class="shuoan-timeline__year">2022 — 2024</div>
-          <div class="shuoan-timeline__dot"></div>
-        </div>
-        <div class="shuoan-timeline__item">
-          <div class="shuoan-timeline__content">
-            <div class="shuoan-timeline__title">旷野与轨道之间</div>
-            <div class="shuoan-timeline__desc">36 岁，在稳妥与冒险之间寻找平衡。左手金融模型，右手 AI 工具。开始记录自己的思考，搭建这个小小的数字花园。依然相信：日拱一卒，功不唐捐。</div>
-          </div>
-          <div class="shuoan-timeline__year">2025 — 现在</div>
-          <div class="shuoan-timeline__dot"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Transition -->
-    <div class="shuoan-transition"></div>
-
-    <!-- Gallery Section -->
-    <section class="shuoan-gallery" id="gallery">
-      <div class="shuoan-gallery__inner">
-        <div class="shuoan-gallery__header">
-          <p class="shuoan-section-caption">GALLERY</p>
-          <h2 class="shuoan-section-title" id="galleryTitle">
-            <span class="line"><span>生活碎片</span></span>
+    <!-- Skills Section -->
+    <section class="shuoan-skills" id="skills">
+      <div class="shuoan-skills__inner">
+        <div class="shuoan-skills__header">
+          <p class="shuoan-section-caption">JOURNEY</p>
+          <h2 class="shuoan-section-title" id="skillsTitle">
+            <span class="line"><span>人生轨迹</span></span>
           </h2>
         </div>
-        <div class="shuoan-gallery__grid">
-          <div class="shuoan-gallery__item">
-            <div class="shuoan-gallery__thumb" style="aspect-ratio: 4/3;">
-              <img src={import.meta.env.BASE_URL + "images/life-subway.jpg"} alt="在路上的宁静" />
-            </div>
-            <div class="shuoan-gallery__info">
-              <span class="shuoan-gallery__name">在路上的宁静</span>
-            </div>
-          </div>
-          <div class="shuoan-gallery__item">
-            <div class="shuoan-gallery__thumb" style="aspect-ratio: 4/3;">
-              <img src={import.meta.env.BASE_URL + "images/life-studio.jpg"} alt="午后工作室" />
-            </div>
-            <div class="shuoan-gallery__info">
-              <span class="shuoan-gallery__name">午后工作室</span>
+        <div class="shuoan-timeline">
+          <div class="shuoan-timeline__item" style="transition-delay: 0.1s;">
+            <div class="shuoan-timeline__time">2013</div>
+            <div class="shuoan-timeline__content">
+              <h3>初入社会</h3>
+              <p>从校园步入职场，怀揣一颗对金融行业的好奇之心。</p>
             </div>
           </div>
-          <div class="shuoan-gallery__item">
-            <div class="shuoan-gallery__thumb" style="aspect-ratio: 4/3;">
-              <img src={import.meta.env.BASE_URL + "images/life-jazz.jpg"} alt="深夜创意灵感" />
-            </div>
-            <div class="shuoan-gallery__info">
-              <span class="shuoan-gallery__name">深夜创意灵感</span>
+          <div class="shuoan-timeline__item" style="transition-delay: 0.2s;">
+            <div class="shuoan-timeline__time">2015</div>
+            <div class="shuoan-timeline__content">
+              <h3>走进代码</h3>
+              <p>开始接触编程，从零学习 HTML 和 Python，打开了新世界的大门。</p>
             </div>
           </div>
-          <div class="shuoan-gallery__item">
-            <div class="shuoan-gallery__thumb" style="aspect-ratio: 4/3;">
-              <img src={import.meta.env.BASE_URL + "images/life-camping.jpg"} alt="星空下的篝火" />
+          <div class="shuoan-timeline__item" style="transition-delay: 0.3s;">
+            <div class="shuoan-timeline__time">2018</div>
+            <div class="shuoan-timeline__content">
+              <h3>爵士迷情</h3>
+              <p>被一段即兴萨克斯引入爵士乐的深坑，从此耳机里常驻。</p>
             </div>
-            <div class="shuoan-gallery__info">
-              <span class="shuoan-gallery__name">星空下的篝火</span>
+          </div>
+          <div class="shuoan-timeline__item" style="transition-delay: 0.4s;">
+            <div class="shuoan-timeline__time">2020</div>
+            <div class="shuoan-timeline__content">
+              <h3>端起相机</h3>
+              <p>购入了第一台属于自己的相机，开始在街头记录光影。</p>
+            </div>
+          </div>
+          <div class="shuoan-timeline__item" style="transition-delay: 0.5s;">
+            <div class="shuoan-timeline__time">2025</div>
+            <div class="shuoan-timeline__content">
+              <h3>仍在路上</h3>
+              <p>依旧热血、依然好奇，用镜头和代码书写属于自己的故事。</p>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Music Section -->
+    <section class="shuoan-music" id="music">
+      <div class="shuoan-music__inner">
+        <div class="shuoan-music__header">
+          <p class="shuoan-section-caption">MUSIC</p>
+          <h2 class="shuoan-section-title" id="musicTitle">
+            <span class="line"><span>我的音乐</span></span>
+          </h2>
+        </div>
+
+        <!-- Player -->
+        <div class="shuoan-player" id="shuoan-player">
+          <div class="shuoan-player__cover">
+            <img src={songs[0].cover} alt="cover" id="player-cover" />
+            <div class="shuoan-player__cover-overlay" id="player-cover-overlay">
+              <svg viewBox="0 0 24 24" width="48" height="48" fill="currentColor" id="player-cover-icon">
+                <polygon points="8,5 19,12 8,19" />
+              </svg>
+            </div>
+          </div>
+          <div class="shuoan-player__body">
+            <div class="shuoan-player__info">
+              <h3 id="player-title">{songs[0].title}</h3>
+              <p id="player-artist">{songs[0].artist}</p>
+            </div>
+            <div class="shuoan-player__progress">
+              <div class="shuoan-player__progress-track" id="progress-track">
+                <div class="shuoan-player__progress-fill" id="player-progress-fill"></div>
+                <div class="shuoan-player__progress-thumb" id="player-progress-thumb"></div>
+              </div>
+              <input type="range" min="0" max="100" value="0" step="0.1" id="player-progress" />
+              <div class="shuoan-player__time">
+                <span id="player-current">0:00</span>
+                <span id="player-duration">--:--</span>
+              </div>
+            </div>
+            <div class="shuoan-player__controls">
+              <button class="shuoan-player__btn" id="btn-prev" aria-label="Previous">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M6 6h2v12H6V6zm3.5 6 8.5 6V6l-8.5 6z" />
+                </svg>
+              </button>
+              <button class="shuoan-player__btn shuoan-player__btn--play" id="btn-play" aria-label="Play">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" id="icon-play">
+                  <polygon points="8,5 19,12 8,19" />
+                </svg>
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" id="icon-pause" style="display:none">
+                  <rect x="6" y="4" width="4" height="16" />
+                  <rect x="14" y="4" width="4" height="16" />
+                </svg>
+              </button>
+              <button class="shuoan-player__btn" id="btn-next" aria-label="Next">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+                </svg>
+              </button>
+            </div>
+            <div class="shuoan-player__volume">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+              </svg>
+              <div class="shuoan-player__volume-track">
+                <div class="shuoan-player__volume-fill" id="volume-fill" style="width:80%"></div>
+              </div>
+              <input type="range" min="0" max="100" value="80" id="player-volume" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Playlist -->
+        <div class="shuoan-playlist">
+          <button class="shuoan-playlist__toggle" id="playlist-toggle" aria-expanded="false">
+            <span>播放列表 ({songs.length})</span>
+            <svg class="shuoan-playlist__arrow" id="playlist-arrow" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+            </svg>
+          </button>
+          <div class="shuoan-playlist__list" id="playlist-list" aria-hidden="true">
+            {songs.map((song, index) => (
+              <div class="shuoan-playlist__item" data-index={index} data-file={song.file} data-cover={song.cover}>
+                <div class="shuoan-playlist__num">{String(index + 1).padStart(2, '0')}</div>
+                <div class="shuoan-playlist__detail">
+                  <span class="shuoan-playlist__name">{song.title}</span>
+                  <span class="shuoan-playlist__artist">{song.artist}</span>
+                </div>
+                <div class="shuoan-playlist__duration" data-duration={song.file}>--:--</div>
+                <div class="shuoan-playlist__icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                    <polygon points="8,5 19,12 8,19" />
+                  </svg>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Hidden Audio Element -->
+        <audio id="audio-player" preload="metadata"></audio>
       </div>
     </section>
 
@@ -276,7 +329,7 @@
         observe('.shuoan-section-title', function(el) { el.classList.add('visible'); });
         observe('.shuoan-about__image', function(el) { el.classList.add('visible'); });
         observe('.shuoan-tags', function(el) { el.classList.add('visible'); });
-        observe('.shuoan-gallery__item', function(el) { el.classList.add('visible'); });
+        observe('.shuoan-playlist__item', function(el) { el.classList.add('visible'); });
         observe('.shuoan-timeline__item', function(el) {
           el.style.opacity = '1';
           el.style.transform = 'translateY(0)';
@@ -299,6 +352,198 @@
           item.style.transform = 'translateY(20px)';
           item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         });
+
+        // ===== Music Player =====
+        var audio = document.getElementById('audio-player');
+        var cover = document.getElementById('player-cover');
+        var titleEl = document.getElementById('player-title');
+        var artistEl = document.getElementById('player-artist');
+        var playBtn = document.getElementById('btn-play');
+        var prevBtn = document.getElementById('btn-prev');
+        var nextBtn = document.getElementById('btn-next');
+        var progressInput = document.getElementById('player-progress');
+        var progressFill = document.getElementById('player-progress-fill');
+        var progressThumb = document.getElementById('player-progress-thumb');
+        var currentEl = document.getElementById('player-current');
+        var durationEl = document.getElementById('player-duration');
+        var iconPlay = document.getElementById('icon-play');
+        var iconPause = document.getElementById('icon-pause');
+        var playlistToggle = document.getElementById('playlist-toggle');
+        var playlistList = document.getElementById('playlist-list');
+        var playlistArrow = document.getElementById('playlist-arrow');
+        var volumeInput = document.getElementById('player-volume');
+        var volumeFill = document.getElementById('volume-fill');
+        var coverOverlay = document.getElementById('player-cover-overlay');
+        var progressTrack = document.getElementById('progress-track');
+        var playlistItems = document.querySelectorAll('.shuoan-playlist__item');
+        var durationEls = document.querySelectorAll('.shuoan-playlist__duration');
+
+        var songData = [];
+        playlistItems.forEach(function(item) {
+          songData.push({
+            file: item.getAttribute('data-file'),
+            title: item.querySelector('.shuoan-playlist__name').textContent,
+            artist: item.querySelector('.shuoan-playlist__artist').textContent,
+            cover: item.getAttribute('data-cover') || ''
+          });
+        });
+
+        var currentSongIndex = 0;
+        var isSeeking = false;
+
+        function formatTime(seconds) {
+          if (isNaN(seconds)) return '--:--';
+          var m = Math.floor(seconds / 60);
+          var s = Math.floor(seconds % 60);
+          return m + ':' + (s < 10 ? '0' : '') + s;
+        }
+
+        function preloadDurations() {
+          songData.forEach(function(song, idx) {
+            var tempAudio = new Audio();
+            tempAudio.preload = 'metadata';
+            tempAudio.src = song.file;
+            tempAudio.addEventListener('loadedmetadata', function() {
+              var dur = durationEls[idx];
+              if (dur) dur.textContent = formatTime(tempAudio.duration);
+            });
+          });
+        }
+
+        function loadSong(index) {
+          currentSongIndex = index;
+          var song = songData[index];
+          audio.src = song.file;
+          titleEl.textContent = song.title;
+          artistEl.textContent = song.artist;
+          if (song.cover) cover.src = song.cover;
+          progressInput.value = 0;
+          progressFill.style.width = '0%';
+          progressThumb.style.left = '0%';
+          currentEl.textContent = '0:00';
+          durationEl.textContent = '--:--';
+
+          playlistItems.forEach(function(item, i) {
+            item.classList.toggle('active', i === index);
+          });
+        }
+
+        function togglePlay() {
+          if (!audio.src) loadSong(0);
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
+        }
+
+        function updatePlayButton() {
+          if (audio.paused) {
+            iconPlay.style.display = '';
+            iconPause.style.display = 'none';
+            coverOverlay.style.opacity = '1';
+          } else {
+            iconPlay.style.display = 'none';
+            iconPause.style.display = '';
+            coverOverlay.style.opacity = '0';
+          }
+        }
+
+        function playPrev() {
+          var idx = (currentSongIndex - 1 + songData.length) % songData.length;
+          loadSong(idx);
+          audio.play();
+        }
+
+        function playNext() {
+          var idx = (currentSongIndex + 1) % songData.length;
+          loadSong(idx);
+          audio.play();
+        }
+
+        function handleSeek(val) {
+          var time = (val / 100) * audio.duration;
+          if (!isNaN(time)) audio.currentTime = time;
+        }
+
+        playBtn.addEventListener('click', togglePlay);
+        prevBtn.addEventListener('click', playPrev);
+        nextBtn.addEventListener('click', playNext);
+
+        audio.addEventListener('play', updatePlayButton);
+        audio.addEventListener('pause', updatePlayButton);
+        audio.addEventListener('ended', playNext);
+
+        audio.addEventListener('loadedmetadata', function() {
+          durationEl.textContent = formatTime(audio.duration);
+        });
+
+        audio.addEventListener('timeupdate', function() {
+          if (isSeeking) return;
+          var pct = (audio.currentTime / audio.duration) * 100;
+          if (isNaN(pct)) return;
+          progressInput.value = pct;
+          progressFill.style.width = pct + '%';
+          progressThumb.style.left = pct + '%';
+          currentEl.textContent = formatTime(audio.currentTime);
+        });
+
+        progressInput.addEventListener('input', function() {
+          isSeeking = true;
+          var val = parseFloat(this.value);
+          progressFill.style.width = val + '%';
+          progressThumb.style.left = val + '%';
+        });
+
+        progressInput.addEventListener('change', function() {
+          handleSeek(parseFloat(this.value));
+          isSeeking = false;
+        });
+
+        if (progressTrack) {
+          progressTrack.addEventListener('click', function(e) {
+            var rect = this.getBoundingClientRect();
+            var pct = ((e.clientX - rect.left) / rect.width) * 100;
+            pct = Math.max(0, Math.min(100, pct));
+            progressInput.value = pct;
+            progressFill.style.width = pct + '%';
+            progressThumb.style.left = pct + '%';
+            handleSeek(pct);
+          });
+        }
+
+        volumeInput.addEventListener('input', function() {
+          var val = this.value;
+          audio.volume = val / 100;
+          volumeFill.style.width = val + '%';
+        });
+
+        if (playlistToggle && playlistList) {
+          playlistToggle.addEventListener('click', function() {
+            var expanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', String(!expanded));
+            playlistList.setAttribute('aria-hidden', String(expanded));
+            playlistList.classList.toggle('expanded', !expanded);
+            if (playlistArrow) {
+              playlistArrow.style.transform = expanded ? 'rotate(0deg)' : 'rotate(180deg)';
+            }
+          });
+        }
+
+        playlistItems.forEach(function(item, index) {
+          item.addEventListener('click', function() {
+            loadSong(index);
+            audio.play();
+          });
+        });
+
+        if (coverOverlay) {
+          coverOverlay.addEventListener('click', togglePlay);
+        }
+
+        audio.volume = 0.8;
+        preloadDurations();
+        loadSong(0);
 
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', triggerHero);
