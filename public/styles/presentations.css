@@ -671,98 +671,224 @@ body.page-presentations {
   );
 }
 
-/* ========== GALLERY ========== */
-.shuoan-gallery {
+/* ========== MUSIC (replaces Gallery) ========== */
+.shuoan-music {
   padding: 120px 48px;
   background-color: #FAF6F0;
 }
 
-.shuoan-gallery__inner {
-  max-width: 1200px;
+.shuoan-music__inner {
+  max-width: 800px;
   margin: 0 auto;
 }
 
-.shuoan-gallery__header {
+.shuoan-music__header {
   text-align: center;
   margin-bottom: 64px;
 }
 
-.shuoan-gallery .shuoan-section-title {
-  color: var(--shuoan-text);
+/* Player */
+.shuoan-music__player {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+  margin-bottom: 24px;
+  text-align: center;
 }
 
-.shuoan-gallery__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.shuoan-gallery__item {
-  cursor: pointer;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.shuoan-gallery__thumb {
+.shuoan-music__cover {
+  width: 180px;
+  height: 180px;
+  border-radius: 16px;
   overflow: hidden;
-  border-radius: 14px;
-  position: relative;
+  margin: 0 auto 28px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
 }
 
-.shuoan-gallery__thumb::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.03);
-  transition: background 0.4s ease;
-  pointer-events: none;
-  border-radius: 14px;
-}
-
-.shuoan-gallery__item:hover .shuoan-gallery__thumb::after {
-  background: rgba(0, 0, 0, 0);
-}
-
-.shuoan-gallery__thumb img {
+.shuoan-music__cover img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: sepia(15%) saturate(75%) brightness(1.0);
-  transition: filter 0.6s ease, transform 0.4s ease;
+  display: block;
 }
 
-.shuoan-gallery__item:hover .shuoan-gallery__thumb img {
-  filter: sepia(0%) saturate(100%) brightness(1.05);
-  transform: scale(1.02);
+.shuoan-music__info h3 {
+  font-family: 'LXGW WenKai', 'Noto Sans SC', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--shuoan-text);
+  margin: 0 0 4px 0;
 }
 
-.shuoan-gallery__info {
+.shuoan-music__info p {
+  font-size: 14px;
+  color: var(--shuoan-text-secondary);
+  margin: 0 0 28px 0;
+}
+
+/* Progress */
+.shuoan-music__progress {
+  max-width: 400px;
+  margin: 0 auto 24px;
+}
+
+.shuoan-music__progress-bar {
+  height: 4px;
+  background: #EDE8E0;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.shuoan-music__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--shuoan-accent), #D4846C);
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.15s linear;
+}
+
+.shuoan-music__time {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 12px;
-}
-
-.shuoan-gallery__name {
-  font-size: 14px;
-  color: var(--shuoan-text);
-}
-
-.shuoan-gallery__date {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 11px;
+  color: var(--shuoan-text-secondary);
+  margin-top: 8px;
+  letter-spacing: 0.05em;
+}
+
+/* Controls */
+.shuoan-music__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.shuoan-music__btn {
+  background: none;
+  border: none;
+  color: var(--shuoan-text-secondary);
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.25s ease;
+}
+
+.shuoan-music__btn:hover {
+  color: var(--shuoan-accent);
+  background: rgba(192, 108, 77, 0.08);
+}
+
+.shuoan-music__btn:active {
+  transform: scale(0.92);
+}
+
+.shuoan-music__btn--play {
+  width: 56px;
+  height: 56px;
+  background: var(--shuoan-accent);
+  color: white;
+  box-shadow: 0 4px 18px rgba(192, 108, 77, 0.35);
+}
+
+.shuoan-music__btn--play:hover {
+  background: #B05E40;
+  color: white;
+  transform: scale(1.06);
+}
+
+.shuoan-music__btn--play:active {
+  transform: scale(0.95);
+}
+
+/* Playlist */
+.shuoan-music__playlist {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.shuoan-music__song {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 28px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(44, 44, 44, 0.05);
+  transition: background 0.2s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.shuoan-music__song.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s ease;
+}
+
+.shuoan-music__song:last-child {
+  border-bottom: none;
+}
+
+.shuoan-music__song:hover {
+  background: rgba(192, 108, 77, 0.04);
+}
+
+.shuoan-music__song.active {
+  background: rgba(192, 108, 77, 0.08);
+}
+
+.shuoan-music__song.active .shuoan-music__song-num {
+  color: var(--shuoan-accent);
+}
+
+.shuoan-music__song.active .shuoan-music__song-name {
+  color: var(--shuoan-accent);
+}
+
+.shuoan-music__song-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  color: var(--shuoan-text-secondary);
+  min-width: 28px;
+  text-align: center;
+  transition: color 0.2s ease;
+}
+
+.shuoan-music__song-name {
+  flex: 1;
+  font-size: 15px;
+  color: var(--shuoan-text);
+  font-family: 'LXGW WenKai', 'Noto Sans SC', sans-serif;
+  transition: color 0.2s ease;
+}
+
+.shuoan-music__song-artist {
+  font-size: 13px;
   color: var(--shuoan-text-secondary);
 }
 
 @media (max-width: 636px) {
-  .shuoan-gallery {
+  .shuoan-music {
     padding: 80px 20px;
   }
-  .shuoan-gallery__grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .shuoan-music__player {
+    padding: 28px 20px;
+  }
+  .shuoan-music__cover {
+    width: 140px;
+    height: 140px;
+  }
+  .shuoan-music__song {
+    padding: 14px 20px;
   }
 }
 
