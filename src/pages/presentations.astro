@@ -147,7 +147,7 @@
     <!-- Transition -->
     <div class="shuoan-transition"></div>
 
-    <!-- ===== MUSIC SECTION (replaces Gallery) ===== -->
+    <!-- ===== MUSIC SECTION ===== -->
     <section class="shuoan-music" id="music">
       <div class="shuoan-music__inner">
         <div class="shuoan-music__header">
@@ -162,8 +162,8 @@
             <img src="/images/music/cover1.jpg" alt="cover" id="music-cover" />
           </div>
           <div class="shuoan-music__info">
-            <h3 id="music-title">歌曲一</h3>
-            <p id="music-artist">歌手一</p>
+            <h3 id="music-title">白兰鸽巡游记</h3>
+            <p id="music-artist">丢火车</p>
           </div>
           <div class="shuoan-music__progress">
             <div class="shuoan-music__progress-bar" id="music-progress-bar">
@@ -189,17 +189,17 @@
         </div>
 
         <div class="shuoan-music__playlist">
-          <div class="shuoan-music__song active" data-index="0" data-file="/music/song1.mp3" data-cover="/images/music/cover1.jpg" data-title="歌曲一" data-artist="歌手一">
+          <div class="shuoan-music__song active" data-index="0" data-file="/music/song1.mp3" data-cover="/images/music/cover1.jpg" data-title="白兰鸽巡游记" data-artist="丢火车">
             <span class="shuoan-music__song-num">01</span>
             <span class="shuoan-music__song-name">白兰鸽巡游记</span>
             <span class="shuoan-music__song-artist">丢火车</span>
           </div>
-          <div class="shuoan-music__song" data-index="1" data-file="/music/song2.mp3" data-cover="/images/music/cover2.jpg" data-title="歌曲二" data-artist="歌手二">
+          <div class="shuoan-music__song" data-index="1" data-file="/music/song2.mp3" data-cover="/images/music/cover2.jpg" data-title="青春纪念册" data-artist="可米小子">
             <span class="shuoan-music__song-num">02</span>
             <span class="shuoan-music__song-name">青春纪念册</span>
             <span class="shuoan-music__song-artist">可米小子</span>
           </div>
-          <div class="shuoan-music__song" data-index="2" data-file="/music/song3.mp3" data-cover="/images/music/cover3.jpg" data-title="歌曲三" data-artist="歌手三">
+          <div class="shuoan-music__song" data-index="2" data-file="/music/song3.mp3" data-cover="/images/music/cover3.jpg" data-title="红蜻蜓" data-artist="小虎队">
             <span class="shuoan-music__song-num">03</span>
             <span class="shuoan-music__song-name">红蜻蜓</span>
             <span class="shuoan-music__song-artist">小虎队</span>
@@ -250,7 +250,7 @@
           mobileOverlay.querySelectorAll('a').forEach(function(link) {
             link.addEventListener('click', function() {
               menuBtn.classList.remove('active');
-              mobileOverlay.classList.remove('active');
+n              mobileOverlay.classList.remove('active');
               document.body.style.overflow = '';
             });
           });
@@ -268,7 +268,7 @@
           if (heroBg) {
             heroBg.style.transform = 'scale(1.08)';
             heroBg.style.transition = 'transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)';
-n            requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
               requestAnimationFrame(function() {
                 heroBg.style.transform = 'scale(1)';
               });
@@ -294,7 +294,6 @@ n            requestAnimationFrame(function() {
         observe('.shuoan-section-title', function(el) { el.classList.add('visible'); });
         observe('.shuoan-about__image', function(el) { el.classList.add('visible'); });
         observe('.shuoan-tags', function(el) { el.classList.add('visible'); });
-        observe('.shuoan-music__song', function(el) { el.classList.add('visible'); });
         observe('.shuoan-timeline__item', function(el) {
           el.style.opacity = '1';
           el.style.transform = 'translateY(0)';
@@ -317,6 +316,12 @@ n            requestAnimationFrame(function() {
           item.style.transform = 'translateY(20px)';
           item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         });
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', triggerHero);
+        } else {
+          triggerHero();
+        }
 
         // ===== Music Player =====
         (function() {
@@ -348,7 +353,6 @@ n            requestAnimationFrame(function() {
           });
 
           var currentIdx = 0;
-          var isSeeking = false;
 
           function fmt(t) {
             if (isNaN(t)) return '0:00';
@@ -407,7 +411,6 @@ n            requestAnimationFrame(function() {
             durationEl.textContent = fmt(audio.duration);
           });
           audio.addEventListener('timeupdate', function() {
-            if (isSeeking) return;
             if (audio.duration) {
               progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
               currentEl.textContent = fmt(audio.currentTime);
@@ -433,12 +436,6 @@ n            requestAnimationFrame(function() {
           audio.volume = 0.8;
           load(0);
         })();
-
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', triggerHero);
-        } else {
-          triggerHero();
-        }
       })();
     </script>
   </body>

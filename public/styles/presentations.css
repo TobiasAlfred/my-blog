@@ -110,11 +110,6 @@ body.page-presentations {
   border: 1px solid rgba(44, 44, 44, 0.08);
 }
 
-.shuoan-nav__links li {
-  margin: 0;
-  padding: 0;
-}
-
 .shuoan-nav__links a {
   position: relative;
   font-family: 'Noto Sans SC', sans-serif;
@@ -466,10 +461,6 @@ body.page-presentations {
   transition-delay: 0.08s;
 }
 
-.shuoan-about__right {
-  padding-top: 16px;
-}
-
 .shuoan-about__text {
   color: var(--shuoan-text-secondary);
   margin-bottom: 24px;
@@ -486,9 +477,6 @@ body.page-presentations {
   .shuoan-about__inner {
     flex-direction: column;
     gap: 40px;
-  }
-  .shuoan-about__left {
-    flex: none;
   }
   .shuoan-section-title {
     font-size: 32px;
@@ -687,7 +675,6 @@ body.page-presentations {
   margin-bottom: 64px;
 }
 
-/* Player */
 .shuoan-music__player {
   background: white;
   border-radius: 20px;
@@ -727,7 +714,6 @@ body.page-presentations {
   margin: 0 0 28px 0;
 }
 
-/* Progress */
 .shuoan-music__progress {
   max-width: 400px;
   margin: 0 auto 24px;
@@ -760,7 +746,6 @@ body.page-presentations {
   letter-spacing: 0.05em;
 }
 
-/* Controls */
 .shuoan-music__controls {
   display: flex;
   align-items: center;
@@ -808,7 +793,6 @@ body.page-presentations {
   transform: scale(0.95);
 }
 
-/* Playlist */
 .shuoan-music__playlist {
   background: white;
   border-radius: 16px;
@@ -824,14 +808,6 @@ body.page-presentations {
   cursor: pointer;
   border-bottom: 1px solid rgba(44, 44, 44, 0.05);
   transition: background 0.2s ease;
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.shuoan-music__song.visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s ease;
 }
 
 .shuoan-music__song:last-child {
